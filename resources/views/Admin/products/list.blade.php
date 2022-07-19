@@ -34,7 +34,7 @@
                 @endforeach
             </tbody>
     </table>
-    {!!$products -> links() !!}
+    {!!$products -> links('pagination::bootstrap-4') !!}
     {{-- <nav class="float-right">
         <ul class="pagination pagination-rounded mb-0">
             <li class="page-item">
