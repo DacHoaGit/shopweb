@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +56,7 @@
                     <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                         <!-- Block1 -->
                         <div class="block1 wrap-pic-w">
-                            <img src="template/images/banner-01.jpg" alt="IMG-BANNER">
+                            <img src="{{$menu->thumb}}" alt="IMG-BANNER">
 
                             <a href="/danh-muc/{{$menu->id}}-{{\Str::slug($menu->name,'-')}}.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                                 <div class="block1-txt-child1 flex-col-l">
@@ -343,7 +342,7 @@
 						<div class="block2-pic hov-img0">
 							<img src="{{$product->thumb}}" alt="IMG-PRODUCT">
 
-							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+							<a href="" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Quick View
 							</a>
 						</div>
@@ -553,7 +552,6 @@ Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
 								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 								<div class="slick3 gallery-lb">
-									@foreach ($products as $product)
 									<div class="item-slick3" data-thumb="{{$product->thumb}}">
 										<div class="wrap-pic-w pos-relative">
 											<img src="{{$product->thumb}}" alt="IMG-PRODUCT">
@@ -563,7 +561,6 @@ Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
 											</a>
 										</div>
 									</div>
-									@endforeach
 								</div>
 							</div>
 						</div>
@@ -572,15 +569,15 @@ Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
 					<div class="col-md-6 col-lg-5 p-b-30">
 						<div class="p-r-50 p-t-5 p-lr-0-lg">
 							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-								Lightweight Jacket
+								{{$product->name}}
 							</h4>
 
 							<span class="mtext-106 cl2">
-								$58.79
+								{{$product->price_sale}}
 							</span>
 
 							<p class="stext-102 cl3 p-t-23">
-								Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+								{{$product->description}}
 							</p>
 							
 							<!--  -->

@@ -27,6 +27,7 @@
         </div>
         <img id="pic" height="100" src="{{$slider->thumb}}" alt="">
     </div>
+    
     <div class="mt-3">
         <div class="custom-control custom-radio">
             <input type="radio" id="customRadio1" name="active" class="custom-control-input" value="0">

@@ -14,6 +14,7 @@ class Menu extends Model
         'description',
         'content',
         'active',
+        'thumb',
     ];
     public function getParent(){
         return $this->parent_id;

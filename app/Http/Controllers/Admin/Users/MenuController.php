@@ -43,6 +43,7 @@ class MenuController extends Controller
         $menu->description = (string) $request->input('description');
         $menu->content = (string) $request->input('content');
         $menu->active = (int) $request->input('active');
+        $menu->thumb = (string) $request->input('thumb');
         $menu->save();
         Session::flash('success', 'Edit Success');
         return redirect('/admin/menus/list');
@@ -56,6 +57,7 @@ class MenuController extends Controller
             'description'=>(string) $request->input('description'),
             'content'=>(string) $request->input('content'),
             'active'=>(int) $request->input('active'),
+            'thumb'=>(string) $request->input('thumb')
             ];
         $this->model->create($arr);
         Session::flash('success','create success');
