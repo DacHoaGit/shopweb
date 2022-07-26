@@ -6,9 +6,14 @@ use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\Users\LoginController;
 // use App\Http\Controllers\Admin\Users\MainController;
 use App\Http\Controllers\admin\users\MenuController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\MainController as ControllersMainController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\MenuController as ControllersMenuController;
+use App\Http\Controllers\ProductController as ControllersProductController;
+use App\Http\Controllers\TestController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,3 +69,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/', [MainController::class,'index'])->name('home');
+Route::post('/services/load-product', [MainController::class,'loadProduct']);
+Route::get('/danh-muc/{id}-{slug}.html', [ControllersMenuController::class,'index']);
+Route::get('/san-pham/{id}-{slug}.html', [ControllersProductController::class,'index']);
+Route::post('/carts', [CartController::class,'index']);
+Route::get('/carts', [CartController::class,'show']);
+Route::post('/update-carts', [CartController::class,'update']);
+Route::get('/test', [TestController::class,'index']);

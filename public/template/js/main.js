@@ -207,7 +207,7 @@
     $('.js-show-sidebar').on('click',function(){
         $('.js-sidebar').addClass('show-sidebar');
     });
-
+    
     $('.js-hide-sidebar').on('click',function(){
         $('.js-sidebar').removeClass('show-sidebar');
     });
@@ -269,6 +269,7 @@
     /*==================================================================
     [ Show modal1 ]*/
     $('.js-show-modal1').on('click',function(e){
+        alert('ahah');
         e.preventDefault();
         $('.js-modal1').addClass('show-modal1');
     });

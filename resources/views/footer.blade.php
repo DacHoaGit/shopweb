@@ -1,12 +1,12 @@
 <!--===============================================================================================-->	
-<script src="template/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="{{asset("template/vendor/jquery/jquery-3.2.1.min.js")}}"></script>
 <!--===============================================================================================-->
-	<script src="template/vendor/animsition/js/animsition.min.js"></script>
+	<script src="{{asset("template/vendor/animsition/js/animsition.min.js")}}"></script>
 <!--===============================================================================================-->
-	<script src="template/vendor/bootstrap/js/popper.js"></script>
-	<script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="{{asset("template/vendor/bootstrap/js/popper.js")}}"></script>
+	<script src="{{asset("template/vendor/bootstrap/js/bootstrap.min.js")}}"></script>
 <!--===============================================================================================-->
-	<script src="template/vendor/select2/select2.min.js"></script>
+	<script src="{{asset("template/vendor/select2/select2.min.js")}}"></script>
 	<script>
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -16,18 +16,18 @@
 		})
 	</script>
 <!--===============================================================================================-->
-	<script src="template/vendor/daterangepicker/moment.min.js"></script>
-	<script src="template/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="{{asset("template/vendor/daterangepicker/moment.min.js")}}"></script>
+	<script src="{{asset("template/vendor/daterangepicker/daterangepicker.js")}}"></script>
 <!--===============================================================================================-->
-	<script src="template/vendor/slick/slick.min.js"></script>
-	<script src="template/js/slick-custom.js"></script>
+	<script src="{{asset("template/vendor/slick/slick.min.js")}}"></script>
+	<script src="{{asset("template/js/slick-custom.js")}}"></script>
 <!--===============================================================================================-->
-	<script src="template/vendor/parallax100/parallax100.js"></script>
+	<script src="{{asset("template/vendor/parallax100/parallax100.js")}}"></script>
 	<script>
         $('.parallax100').parallax100();
 	</script>
 <!--===============================================================================================-->
-	<script src="template/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script src="{{asset("template/vendor/MagnificPopup/jquery.magnific-popup.min.js")}}"></script>
 	<script>
 		$('.gallery-lb').each(function() { // the containers for all your galleries
 			$(this).magnificPopup({
@@ -41,9 +41,9 @@
 		});
 	</script>
 <!--===============================================================================================-->
-	<script src="template/vendor/isotope/isotope.pkgd.min.js"></script>
+	<script src="{{asset("template/vendor/isotope/isotope.pkgd.min.js")}}"></script>
 <!--===============================================================================================-->
-	<script src="template/vendor/sweetalert/sweetalert.min.js"></script>
+	<script src="{{asset("template/vendor/sweetalert/sweetalert.min.js")}}"></script>
 	<script>
 		$('.js-addwish-b2').on('click', function(e){
 			e.preventDefault();
@@ -76,12 +76,12 @@
 			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
 			$(this).on('click', function(){
 				swal(nameProduct, "is added to cart !", "success");
+				console.log(name)
 			});
 		});
-	
 	</script>
 <!--===============================================================================================-->
-	<script src="template/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="{{asset("template/vendor/perfect-scrollbar/perfect-scrollbar.min.js")}}"></script>
 	<script>
 		$('.js-pscroll').each(function(){
 			$(this).css('position','relative');
@@ -98,4 +98,6 @@
 		});
 	</script>
 <!--===============================================================================================-->
-	<script src="template/js/main.js"></script>
+	<script src="{{asset("template/js/main.js")}}"></script>
+	<script src="{{asset("template/js/loadmore.js")}}"></script>
+	{{-- <script src="{{asset("template/js/updatecart.js")}}"></script> --}}
