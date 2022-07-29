@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        if(!Schema::hasColumn('menus','thumb')){
-            Schema::table('menus', function (Blueprint $table) {
-                $table->string('thumb')->after('active');
-            });
-        }
-        
+        Schema::create('customers', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('address');
+            $table->string('phone');
+            $table->text('note');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -28,10 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        if(Schema::hasColumn('menus','thumb')){
-            Schema::table('menus', function (Blueprint $table) {
-                $table->dropColumn('thumb');
-            });
-        }
+        Schema::dropIfExists('customers');
     }
 };

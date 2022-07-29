@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\View;
 
 class CartController extends Controller
 {
     public function index(Request $request)
     {
-
 
         $qty = (int)$request->input('num-product');
         $product_id = (int)$request->input('productId');
@@ -57,8 +58,60 @@ class CartController extends Controller
         ]);
     }
     public function update(Request $request){
-        // dd($request->input());
+
+
         Session::put('carts', $request->input('num-product'));
         return redirect('/carts ');
+    }
+
+    public function delete(Request $request){
+        $carts = Session::get('carts');
+        unset($carts[$request->input('id')]);
+        Session::put('carts', $carts);
+        return response()->json([
+            'error' => false,
+            'message'=>'delete success',
+        ]);
+    }
+
+    public function addCard(Request $request){
+        $address = $request->input('ward').', '.$request->input('district').', '.$request->input('city');
+        try {
+
+            DB::beginTransaction();
+            $carts = Session::get('carts');
+            if (is_null($carts)) {
+                return redirect()->back();
+            }
+        
+            $customer = Customer::create([
+                'name' =>$request->input('name'),
+                'address' =>$address,
+                'phone' =>$request->input('phone'),
+                'note' =>$request->input('note'),
+            ]);
+
+            $productId = array_keys($carts);
+            $products = Product::where('active',0)->whereIn('id', $productId)->get();
+
+            foreach ($products as $product) {
+                Cart::create([
+                    'customer_id' =>$customer->id,
+                    'product_id' =>$product->id,
+                    'quantity' =>$carts[$product->id],
+                    'price' =>$product->price_sale,
+                ]);
+            }
+            DB::commit();
+            Session::flash('success', 'Order Error');
+            Session::forget('carts');
+            return redirect()->back();
+            
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Session::flash('error', 'Order Error');
+            return redirect()->back();
+        }
+
     }
 }

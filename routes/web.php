@@ -72,7 +72,16 @@ Route::get('/', [MainController::class,'index'])->name('home');
 Route::post('/services/load-product', [MainController::class,'loadProduct']);
 Route::get('/danh-muc/{id}-{slug}.html', [ControllersMenuController::class,'index']);
 Route::get('/san-pham/{id}-{slug}.html', [ControllersProductController::class,'index']);
-Route::post('/carts', [CartController::class,'index']);
+Route::get('/san-pham/{id}-{slug}.html', [ControllersProductController::class,'index']);
 Route::get('/carts', [CartController::class,'show']);
 Route::post('/update-carts', [CartController::class,'update']);
+Route::DELETE('carts/delete',[CartController::class,'delete']);
+Route::post('/carts', [CartController::class,'index']);
+Route::post('/payment', [CartController::class,'addCard']);
+
+
+
+
+
 Route::get('/test', [TestController::class,'index']);
+
