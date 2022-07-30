@@ -103,7 +103,7 @@ class CartController extends Controller
                 ]);
             }
             DB::commit();
-            Session::flash('success', 'Order Error');
+            Session::flash('success', 'Order Product Success !');
             Session::forget('carts');
             return redirect()->back();
             
