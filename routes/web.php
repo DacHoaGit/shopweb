@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\CartController as AdminCartController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
@@ -30,10 +32,11 @@ use App\Http\Controllers\TestController;
 //});
 Route::get('admin/users/login', [LoginController::class,'index'])->name('login');
 Route::post('admin/users/login/store', [LoginController::class,'store']);
+Route::get('admin/logout', [LoginController::class,'logout']);
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
-        Route::get('main', [MainController::class,'index'])->name('admin');
-        Route::get('/', [MainController::class,'index'])->name('admin');
+        Route::get('main', [HomeController::class,'index'])->name('admin');
+        Route::get('/', [HomeController::class,'index'])->name('admin');
 
         Route::prefix('menus')->group(function () {
             Route::get('add',[MenuController::class,'create']);
@@ -62,6 +65,9 @@ Route::middleware(['auth'])->group(function () {
             Route::post('edit/{slider}',[SliderController::class,'update']);
             Route::DELETE('destroy',[SliderController::class,'destroy']);
         });
+        Route::get('customer',[AdminCartController::class,'index']);
+        Route::get('customer/detail/{customer}',[AdminCartController::class,'detail']);
+        Route::post('customer/update/',[AdminCartController::class,'update']);
 
         Route::post('upload',[UploadController::class,'store'])->name('upload');
     });
@@ -71,7 +77,6 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [MainController::class,'index'])->name('home');
 Route::post('/services/load-product', [MainController::class,'loadProduct']);
 Route::get('/danh-muc/{id}-{slug}.html', [ControllersMenuController::class,'index']);
-Route::get('/san-pham/{id}-{slug}.html', [ControllersProductController::class,'index']);
 Route::get('/san-pham/{id}-{slug}.html', [ControllersProductController::class,'index']);
 Route::get('/carts', [CartController::class,'show']);
 Route::post('/update-carts', [CartController::class,'update']);

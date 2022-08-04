@@ -14,4 +14,7 @@ class Customer extends Model
         'phone',
         'note'
     ];
+    public function cart(){
+        return $this->hasMany(Cart::class);
+    }
 }

@@ -16,8 +16,8 @@ class Helper{
                     <td>'. (($menu->active==0)? 'Yes':'No') .'</td>
                     <td>'. $menu->updated_at .'</td>
                     <td class="table-action">
-                        <a href="/admin/menus/edit/'.$menu->id.'"'.'class="action-icon"> <i class="mdi mdi-pencil"></i></a>
-                        <a href="#" class="action-icon btn-delete" onclick="removeRow('.$menu->id.',\'/admin/menus/destroy\')"> <i class="mdi mdi-delete"></i></a>
+                        <a href="/admin/menus/edit/'.$menu->id.'"'.'class="action-icon"> <i class="bg-success mdi mdi-pencil"></i></a>
+                        <a href="#" class="action-icon btn-delete" onclick="removeRow('.$menu->id.',\'/admin/menus/destroy\')"> <i class="bg-danger mdi mdi-delete"></i></a>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

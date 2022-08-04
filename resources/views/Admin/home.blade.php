@@ -109,6 +109,12 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="side-nav-item">
+                        <a href="/admin/customer" class="side-nav-link">
+                            <i class="mdi mdi-account-details"></i>
+                            <span> Customer </span>
+                        </a>
+                    </li>
                 </ul>
 
                 <!-- Help Box -->
@@ -184,7 +190,7 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="/admin/logout" class="dropdown-item notify-item ">
                                     <i class="mdi mdi-logout mr-1"></i>
                                     <span>Logout</span>
                                 </a>

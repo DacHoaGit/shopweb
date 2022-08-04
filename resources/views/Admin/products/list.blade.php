@@ -23,9 +23,10 @@
                         <td>{{$product->menu->name}}</td>
                         <td>{{$product->price}}</td>
                         <td>{{$product->price_sale}}</td>
-                        <td>{{($product->active==0)? 'Yes':'No'}}</td>
+                        <td>{!!($product->active==0)? '<span class="badge badge-success">Active</span>':'<span class="badge badge-danger">Deactive</span>'!!}</td>
                         <td>{{$product->updated_at}}</td>
                         <td class="table-action">
+                            
                             <a href="/admin/products/edit/{{$product->id}}" class="action-icon"> <i class="mdi mdi-pencil"></i></a>
                             <a href="#" class="action-icon btn-delete" onclick="removeRow({{$product->id}},'/admin/products/destroy')"> <i class="mdi mdi-delete"></i></a>
                         </td>
