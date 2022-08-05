@@ -87,9 +87,9 @@
                                                         </div>
 
                                                         <input class="mtext-104 cl3 txt-center num-product"
-                                                            type="number" name="num-product[{{ $product->id }}]"
+                                                            type="button" name="{{ $product->id }}"
                                                             value="{{ $carts[$product->id] }}">
-
+                                                        
                                                         <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
                                                             id="btn-up">
                                                             <i class="fs-16 zmdi zmdi-plus"></i>
@@ -109,22 +109,10 @@
                                     </tbody>
                                 </table>
                             </div>
-
                             <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-                                <div class="flex-w flex-m m-r-20 m-tb-5">
-                                    <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5"
-                                        type="text" name="coupon" placeholder="Coupon Code">
-
-                                    <div
-                                        class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-                                        Apply coupon
-                                    </div>
-                                </div>
-
                                 <input formaction="/update-carts"
                                     class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
                                     type="submit" value="Update Cart">
-                                {{-- </input> --}}
                             </div>
                         </div>
                     </div>
@@ -420,24 +408,7 @@
                     })
                 }
             })
-            // console.log(ward)
-
-            // const district =await $("#select-district").data('path');
-            // const wards = district.json();
-            // console.log(each.ward);
-            
-
-            // $('#select-ward').empty();
-            // console.log(districts.district.ward.json());
-
-            // $.each(districts.district.ward, function (index, each) {
-            //     $("#select-district").append(`
-            //     <option data-path='${each.file_path}'>
-            //         ${each.pre +' '+ each.name}
-            //     </option>`)
-            // })
         }
-
         async function loadFile() {
             const response = await fetch("{{asset('locations/index.json')}}");
             const cities = await response.json();
@@ -453,12 +424,22 @@
         $('#select-city, #select-district').change(function(){
             loadDistrict();  
         })
-        // $('').change(function(){
-            
-        //     console.log(selectedVal)
-        // })
-        // console.log();
-        
+
+
+
+        $('#btn-up, #btn-down').click(function(){
+            const id = $(".num-product").attr("name");
+            const num = $('.num-product').val();   
+            $.ajax({
+                type:'post',
+                datatype:'json',
+                data:{id,num},
+                url:'/update-carts',
+                success:function(result){
+                    
+                }
+            })
+        })
     })
+    
 </script>
-SsSs    

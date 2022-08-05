@@ -58,10 +58,11 @@ class CartController extends Controller
         ]);
     }
     public function update(Request $request){
-
-
-        Session::put('carts', $request->input('num-product'));
-        return redirect('/carts ');
+        
+        $carts = Session::get('carts') ;
+        $carts[$request->input('id')] = $request->input('num');
+        Session::put('carts',$carts);
+        // return redirect('/carts ');
     }
 
     public function delete(Request $request){
