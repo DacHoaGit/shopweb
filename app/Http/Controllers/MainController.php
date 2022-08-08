@@ -15,13 +15,13 @@ class MainController extends Controller
         return view('main',[
             'sliders'=>Slider::where('active', 0)->get(),
             'menus'=>Menu::select('id','name','thumb')->get(),
-            'products'=>Product::where('active',0)->orderByDesc('id')->limit(4)->get(),
+            'products'=>Product::where('active',0)->orderByDesc('id')->limit(16)->get(),
         ]);
     }
 
     public function loadProduct(Request $request){
         $page = $request->input('page',0);
-        $result = Product::where('active',0)->orderByDesc('id')->offset($page*4)->limit(4)->get();
+        $result = Product::where('active',0)->orderByDesc('id')->offset($page*16)->limit(16)->get();
 
         if(count($result) != 0){
             $html = view('list',['products'=> $result])->render();

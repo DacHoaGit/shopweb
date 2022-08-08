@@ -78,7 +78,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="column-2">{{ $product->name }}</td>
-                                                <td class="column-3">{!! number_format($product->price_sale) !!} VND</td>
+                                                <td class="column-3">{!! $product->price_sale==0 ? number_format($product->price) : number_format($product->price_sale) !!} VND</td>
                                                 <td class="column-4">
                                                     <div class="wrap-num-product flex-w m-l-auto m-r-0">
                                                         <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
@@ -96,9 +96,9 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="column-5">{!! number_format($carts[$product->id] * $product->price_sale) !!} VND</td>
+                                                <td class="column-5">{!! $product->price_sale==0 ? number_format($carts[$product->id] * $product->price) : number_format($carts[$product->id] * $product->price_sale) !!} VND</td>
                                                 @php
-                                                    $total += $carts[$product->id] * $product->price_sale;
+                                                    $product->price_sale==0 ? ($total += $carts[$product->id] * $product->price) : ($total += $carts[$product->id] * $product->price_sale);
                                                 @endphp
                                                 <td class="p-r-20">
                                                     <a class="pointer bg15 bor13 p-lr-15"

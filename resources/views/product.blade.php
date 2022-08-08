@@ -82,10 +82,15 @@
                             {{$product->name}}
                         </h4>
 
-                        <span class="mtext-100 cl3">
-                            Price: {!! number_format($product->price_sale) !!} VND
-                        </span>
-
+                        @if ($product->price_sale)
+                            <span class="fs-15 lh-12 m-r-6" style="color: red;">
+                                <i class="zmdi zmdi-fire"></i>
+                            </span>
+                            Flash Sale: {!! number_format($product->price_sale) !!} VND
+                        @else
+                            Price: {!! number_format($product->price) !!} VND
+                        @endif
+                        
                         <p class="stext-102 cl3 p-t-23">
                             {{$product->description}}
                         </p>

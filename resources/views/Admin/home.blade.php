@@ -9,11 +9,8 @@
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="">
+    <link rel="shortcut icon" href="{{asset('logo.png')}}">
 
-    <!-- third party css -->
-    {{-- <link href="assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" /> --}}
-    <!-- third party css end -->
 
     <!-- App css -->
     <link href="{{asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
@@ -23,7 +20,7 @@
     
 </head>
 
-<body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":true, "showRightSidebarOnStart": true}'>
+<body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
     <!-- Begin page -->
     <div class="wrapper">
         <!-- ========== Left Sidebar Start ========== -->
@@ -32,7 +29,7 @@
             <!-- LOGO -->
             <a href="{{route('admin')}}" class="logo text-center logo-light">
                 <span class="logo-lg">
-                    <img src="" alt="" height="16">
+                    <img src="{{asset('logo.png')}}" alt="" height="100">
                 </span>
                 <span class="logo-sm">
                     <img src="" alt="" height="16">
@@ -42,14 +39,14 @@
             <!-- LOGO -->
             <a href="{{route('admin')}}" class="logo text-center logo-dark">
                 <span class="logo-lg">
-                    <img src="" alt="" height="16">
+                    <img src="{{asset('logo.png')}}" alt="" height="100">
                 </span>
                 <span class="logo-sm">
-                    <img src="" alt="" height="16">
+                    <img src="{{asset('logo.png')}}" alt="" height="100">
                 </span>
             </a>
 
-            <div class="h-100" id="left-side-menu-container" data-simplebar>
+            <div class="h-100 " id="left-side-menu-container" data-simplebar>
 
                 <!--- Sidemenu -->
                 <ul class="metismenu side-nav">
@@ -152,11 +149,10 @@
                             <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                                 aria-expanded="false">
                                 <span class="account-user-avatar"> 
-                                    <img src="" alt="user-image" class="rounded-circle">
+                                    <i class="mdi mdi-account mdi-24px" ></i>
                                 </span>
                                 <span>
-                                    <span class="account-user-name">Dominic Keller</span>
-                                    <span class="account-position">Founder</span>
+                                    <span style="margin-top:10px;" class="account-user-name">{{(auth()->user()->name)}}</span>
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">

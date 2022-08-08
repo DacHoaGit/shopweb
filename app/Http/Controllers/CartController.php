@@ -100,7 +100,7 @@ class CartController extends Controller
                     'customer_id' =>$customer->id,
                     'product_id' =>$product->id,
                     'quantity' =>$carts[$product->id],
-                    'price' =>$product->price_sale,
+                    'price' =>$product->price_sale == 0 ? $product->price : $product->price_sale,
                 ]);
             }
             DB::commit();

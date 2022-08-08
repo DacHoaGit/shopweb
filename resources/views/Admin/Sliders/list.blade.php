@@ -1,7 +1,7 @@
 
 @extends('admin.home')
 @section('content')
-    <table class="table table-striped table-centered mb-0" id="table-data">
+    <table class="table table-striped dt-responsive table-centered mb-0" id="table-data">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -21,9 +21,9 @@
                         <td>{{$slider->name}}</td>
                         <td>{{$slider->url}}</td>
                         <td><img src="{{$slider->thumb}}" height="100" alt="" ></td>
-                        <td>{{($slider->active==0)? 'Yes':'No'}}</td>
+                        <td>{!!($slider->active==0)? '<span class="badge badge-success">Active</span>':'<span class="badge badge-danger">Deactive</span>'!!}</td>
                         <td>{{$slider->updated_at}}</td>
-                        <td class="table-action">
+                        <td class="table-action normal">
                             <a href="/admin/sliders/edit/{{$slider->id}}" class="action-icon"> <i class="mdi mdi-pencil"></i></a>
                             <a href="#" class="action-icon btn-delete" onclick="removeRow({{$slider->id}},'/admin/sliders/destroy')"> <i class="mdi mdi-delete"></i></a>
                         </td>
