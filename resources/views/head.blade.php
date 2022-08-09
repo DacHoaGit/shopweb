@@ -10,23 +10,12 @@
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="{{asset("template/fonts/iconic/css/material-design-iconic-font.min.css")}}">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="{{asset("template/fonts/linearicons-v1.0.0/icon-font.min.css")}}">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="{{asset("template/vendor/animate/animate.css")}}">
-<!--===============================================================================================-->	
-<link rel="stylesheet" type="text/css" href="{{asset("template/vendor/css-hamburgers/hamburgers.min.css")}}">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="{{asset("template/vendor/animsition/css/animsition.min.css")}}">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="{{asset("template/vendor/select2/select2.min.css")}}">
-<!--===============================================================================================-->	
-<link rel="stylesheet" type="text/css" href="{{asset("template/vendor/daterangepicker/daterangepicker.css")}}">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="{{asset("template/vendor/slick/slick.css")}}">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="{{asset("template/vendor/MagnificPopup/magnific-popup.css")}}">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="{{asset("template/vendor/perfect-scrollbar/perfect-scrollbar.css")}}">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="{{asset("template/css/util.css")}}">
 <link rel="stylesheet" type="text/css" href="{{asset("template/css/main.css")}}">
