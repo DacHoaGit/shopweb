@@ -1,8 +1,4 @@
 <header>
-    @php
-        $menusHtml = \app\helpers\Helper::menus($menus)
-    @endphp
-    {{-- {{dd($menus)}} --}}
     <!-- Header desktop -->
     <div class="container-menu-desktop">
         
@@ -17,13 +13,24 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li class="active-menu">
+                        <li >
                             <a href="{{route('home')}}">Home</a>
                         </li>
-
-                        {!! $menusHtml  !!}
+                        @foreach ($menus as $menu)
+                            <li>
+                                <a href="/danh-muc/{{$menu->id}}-{{Str::slug($menu->name, '-')}}.html">{{$menu->name}}</a>
+                                @if (count($menu->childrenMenus))
+                                    @foreach ($menu->childrenMenus as $child)
+                                        <ul class="sub-menu">
+                                            <li><a href="/danh-muc/{{$child->id}}-{{Str::slug($child->name, '-')}}.html">{{$child->name}}</a></li>
+                                        </ul>
+                                    @endforeach
+                                @endif
+                            </li>
+                        @endforeach
                     </ul>
                 </div>	
+
 
                 <!-- Icon header -->
                 <div class="wrap-icon-header flex-w flex-r-m">
@@ -65,14 +72,24 @@
     <div class="menu-mobile">
 
         <ul class="main-menu-m">
-            <li>
+            <li >
                 <a href="{{route('home')}}">Home</a>
-                <span class="arrow-main-menu-m">
-                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                </span>
             </li>
-
-            {!! $menusHtml  !!}
+            @foreach ($menus as $menu)
+                <li>
+                    <a href="/danh-muc/{{$menu->id}}-{{Str::slug($menu->name, '-')}}.html">{{$menu->name}}</a>
+                    @if (count($menu->childrenMenus))
+                        @foreach ($menu->childrenMenus as $child)
+                            <ul class="sub-menu-m" style="display: none;">
+                                <li><a href="/danh-muc/{{$child->id}}-{{Str::slug($child->name, '-')}}.html">{{$child->name}}</a></li>
+                            </ul>
+                        @endforeach
+                        <span class="arrow-main-menu-m">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </span>
+                    @endif
+                </li>
+            @endforeach
 
             <li>
                 <a href="about.html">About</a>

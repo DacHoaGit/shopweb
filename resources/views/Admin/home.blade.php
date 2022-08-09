@@ -10,8 +10,6 @@
     <meta content="Coderthemes" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('logo.png')}}">
-
-
     <!-- App css -->
     <link href="{{asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/app.min.css')}}" rel="stylesheet" type="text/css" id="light-style" />
