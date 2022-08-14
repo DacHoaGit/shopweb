@@ -35,31 +35,121 @@
     <section class="sec-product-detail bg0 p-t-65 p-b-60">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-lg-7 p-b-30">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <!-- Product image -->
+                                    <a href="javascript: void(0);" class="text-center d-block mb-4">
+                                        <img src="{{$product->thumb}}" class="img-fluid" style="max-width: 280px;" alt="Product-img">
+                                    </a>
+                                </div> <!-- end col -->
+                                <div class="col-lg-7">
+                                    <div class="pl-lg-4">
+                                        <!-- Product title -->
+                                        <h3 class="mt-0">{{$product->name}}<a href="javascript: void(0);" class="text-muted"><i class="mdi mdi-square-edit-outline ml-2"></i></a> </h3>
+
+                                        <p class="stext-102 cl3 p-t-23">
+                                            {{ $product->description }}
+                                        </p>
+                
+                                        <!-- Product stock -->
+                                        <div class="mt-3">
+                                            <h4><span class="badge badge-success-lighten">Instock</span></h4>
+                                        </div>
+
+                                        <!-- Product description -->
+                                        <div class="mt-2">
+                                            <h3>
+                                            @if ($product->price_sale)
+                                                <span class="fs-15 lh-12 m-r-6" style="color: red;">
+                                                    <i class="zmdi zmdi-fire"></i>
+                                                </span>
+                                                Flash Sale: {!! number_format($product->price_sale) !!} VND
+                                            @else
+                                                Price: {!! number_format($product->price) !!} VND
+                                            @endif
+                                        </h3>
+                                        </div>
+
+                                        <!-- Quantity -->
+                                        <div class="mt-3">
+                                            <form action="/carts" method="POST">
+                                                <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                        <i class="fs-16 zmdi zmdi-minus"></i>
+                                                    </div>
+        
+                                                    <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                                        name="num-product" value="1">
+        
+                                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                        <i class="fs-16 zmdi zmdi-plus"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="productId" value="{{ $product->id }}">
+                                                <button type="submit"
+                                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                                    Add to cart
+                                                </button>
+                                                @csrf
+                                            </form>
+                                        </div>
+                            
+                                        <!-- Product description -->
+                                        <div class="mt-4">
+                                            <h6 class="font-14">Description:</h6>
+                                            <p>{{ $product->content }}</p>
+                                        </div>
+                                    </div>
+                                </div> <!-- end col -->
+                            </div> <!-- end row-->                            
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div>
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                {{-- <div class="col-md-6 col-lg-7 p-b-30">
                     <div class="p-l-25 p-r-30 p-lr-0-lg">
                         <div class="wrap-slick3 flex-sb flex-w">
-                            <div class="wrap-slick3-dots">
-                                <ul class="slick3-dots" role="tablist" style="">
-                                    <li class="slick-active" role="presentation"><img
-                                            src="{{$product->thumb}}">
-                                        <div class="slick3-dot-overlay"></div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="wrap-slick3-arrows flex-sb-m flex-w"><button
-                                    class="arrow-slick3 prev-slick3 slick-arrow" style=""><i
-                                        class="fa fa-angle-left" aria-hidden="true"></i></button><button
-                                    class="arrow-slick3 next-slick3 slick-arrow" style=""><i
-                                        class="fa fa-angle-right" aria-hidden="true"></i></button></div>
-
                             <div class="slick3 gallery-lb slick-initialized slick-slider slick-dotted">
                                 <div class="slick-list draggable">
-                                    <div class="slick-track" style="opacity: 1; width: 1539px;">
+                                    <div class="slick-track" style="opacity: 1; width: 960px;">
+                                        <div class="item-slick3 slick-slide" data-thumb="{{ $product->thumb }}"
+                                            data-slick-index="0" aria-hidden="true" tabindex="-1" role="tabpanel"
+                                            id="slick-slide10" aria-describedby="slick-slide-control10"
+                                            style="width: 320px; position: relative; left: 0px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;">
+                                        </div>
                                         <div class="item-slick3 slick-slide slick-current slick-active"
-                                            data-thumb="images/product-detail-01.jpg" data-slick-index="0"
-                                            aria-hidden="false" tabindex="0" role="tabpanel" id="slick-slide10"
-                                            aria-describedby="slick-slide-control10"
-                                            style="width: 513px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;">
+                                            data-thumb="{{ $product->thumb }}" data-slick-index="1" aria-hidden="false"
+                                            tabindex="0" role="tabpanel" id="slick-slide11"
+                                            aria-describedby="slick-slide-control11"
+                                            style="width: 320px; position: relative; left: -320px; top: 0px; z-index: 999; opacity: 1;">
                                             <div class="wrap-pic-w pos-relative">
                                                 <img src="{{ $product->thumb }}" alt="IMG-PRODUCT">
 
@@ -79,56 +169,51 @@
                 <div class="col-md-6 col-lg-5 p-b-30">
                     <div class="p-r-50 p-t-5 p-lr-0-lg">
                         <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                            {{$product->name}}
+                            {{ $product->name }}
                         </h4>
 
-                        @if ($product->price_sale)
-                            <span class="fs-15 lh-12 m-r-6" style="color: red;">
-                                <i class="zmdi zmdi-fire"></i>
-                            </span>
-                            Flash Sale: {!! number_format($product->price_sale) !!} VND
-                        @else
-                            Price: {!! number_format($product->price) !!} VND
-                        @endif
                         
+
                         <p class="stext-102 cl3 p-t-23">
-                            {{$product->description}}
+                            
                         </p>
                         <p class="mtext-100 m-t-30 m-b-10">Description:</p>
                         <div class="tab-pane fade show active" id="description" role="tabpanel">
                             <div class="how-pos2 p-lr-15-md">
                                 <p class="stext-102 cl6">
-                                    {{$product->content}}
+                                    {{ $product->content }}
                                 </p>
                             </div>
                         </div>
                         <div class="p-t-33">
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-204 flex-w flex-m respon6-next">
+                            <div class="flex-w flex-r-m p-b-10">
+                                <div class="size-204 flex-w flex-m respon6-next">
                                     <form action="/carts" method="POST">
                                         <div class="wrap-num-product flex-w m-r-20 m-tb-10">
                                             <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-minus"></i>
                                             </div>
 
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                            <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                                name="num-product" value="1">
 
                                             <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-plus"></i>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="productId" value="{{$product->id}}">
-                                        <button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                        <input type="hidden" name="productId" value="{{ $product->id }}">
+                                        <button type="submit"
+                                            class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                             Add to cart
                                         </button>
                                         @csrf
                                     </form>
-								</div>
-							</div>	
-						</div>
-    
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -142,9 +227,9 @@
             </div>
 
             <!-- Slide2 -->
-        <div id="loadProduct">
-            @include('list')
-        </div>
+            <div id="loadProduct">
+                @include('list')
+            </div>
         </div>
     </section>
 

@@ -6,18 +6,8 @@
 	<script src="{{asset("template/vendor/bootstrap/js/popper.js")}}"></script>
 	<script src="{{asset("template/vendor/bootstrap/js/bootstrap.min.js")}}"></script>
 <!--===============================================================================================-->
-	<script src="{{asset("template/vendor/select2/select2.min.js")}}"></script>
-	<script>
-		$(".js-select2").each(function(){
-			$(this).select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $(this).next('.dropDownSelect2')
-			});
-		})
-	</script>
+
 <!--===============================================================================================-->
-	<script src="{{asset("template/vendor/daterangepicker/moment.min.js")}}"></script>
-	<script src="{{asset("template/vendor/daterangepicker/daterangepicker.js")}}"></script>
 <!--===============================================================================================-->
 	<script src="{{asset("template/vendor/slick/slick.min.js")}}"></script>
 	<script src="{{asset("template/js/slick-custom.js")}}"></script>
@@ -81,22 +71,7 @@
 		});
 	</script>
 <!--===============================================================================================-->
-	<script src="{{asset("template/vendor/perfect-scrollbar/perfect-scrollbar.min.js")}}"></script>
-	<script>
-		$('.js-pscroll').each(function(){
-			$(this).css('position','relative');
-			$(this).css('overflow','hidden');
-			var ps = new PerfectScrollbar(this, {
-				wheelSpeed: 1,
-				scrollingThreshold: 1000,
-				wheelPropagation: false,
-			});
 
-			$(window).on('resize', function(){
-				ps.update();
-			})
-		});
-	</script>
 <!--===============================================================================================-->
 	<script src="{{asset("template/js/main.js")}}"></script>
 	<script src="{{asset("template/js/loadmore.js")}}"></script>

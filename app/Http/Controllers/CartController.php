@@ -62,7 +62,7 @@ class CartController extends Controller
         $carts = Session::get('carts') ;
         $carts[$request->input('id')] = $request->input('num');
         Session::put('carts',$carts);
-        // return redirect('/carts ');
+        return response()->json(['success' => true]);
     }
 
     public function delete(Request $request){

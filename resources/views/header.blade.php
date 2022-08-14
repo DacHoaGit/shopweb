@@ -11,6 +11,8 @@
                 </a>
 
                 <!-- Menu desktop -->
+
+                
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li >
@@ -32,16 +34,43 @@
                 </div>	
 
 
-                <!-- Icon header -->
-                <div class="wrap-icon-header flex-w flex-r-m">
 
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}">
-                        <i class="zmdi zmdi-shopping-cart"></i>
+                @auth
+                    <div class="wrap-icon-header flex-w flex-r-m">
+
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ isset($productCarts) ? count($productCarts) : 0 }}">
+                            <i class="zmdi zmdi-shopping-cart"></i>
+                        </div>
                     </div>
-                </div>
+                    <ul class="main-menu ">
+                        <li >
+                            <form method="POST" action="{{ route('logout') }}" x-data>
+                                @csrf
+                                    
+                                <x-jet-responsive-nav-link href="{{ route('logout') }}"
+                                               @click.prevent="$root.submit();">
+                                    {{ __('Log Out') }}
+                                </x-jet-responsive-nav-link>
+                            </form>            
+                        </li>
+                    </ul>
+                @else
+                    <div class="wrap-icon-header flex-w flex-r-m">
+                        <ul class="main-menu">
+                            <li >
+                                <a class="text-xl text-gray-700 dark:text-gray-500 underline" href="{{route('login')}}">Login</a>
+                            </li>
+                            <li >
+                                <a class="text-xl text-gray-700 dark:text-gray-500 underline" href="{{route('register')}}">Register</a>
+                            </li>
+                        </ul>
+                    </div>	
+                @endauth
             </nav>
         </div>	
     </div>
+
+
 
     <!-- Header Mobile -->
     <div class="wrap-header-mobile">
@@ -101,3 +130,5 @@
         </ul>
     </div>
 </header>
+
+

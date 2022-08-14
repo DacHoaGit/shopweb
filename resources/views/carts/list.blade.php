@@ -78,11 +78,10 @@
                                                     </div>
                                                 </td>
                                                 <td class="column-2">{{ $product->name }}</td>
-                                                <td class="column-3">{!! $product->price_sale==0 ? number_format($product->price) : number_format($product->price_sale) !!} VND</td>
+                                                <td class="column-3 price">{!! $product->price_sale==0 ? number_format($product->price) : number_format($product->price_sale) !!} VND</td>
                                                 <td class="column-4">
                                                     <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
-                                                            id="btn-down">
+                                                        <div class="btn-num-product-down btn-down cl8 hov-btn3 trans-04 flex-c-m">
                                                             <i class="fs-16 zmdi zmdi-minus"></i>
                                                         </div>
 
@@ -90,13 +89,12 @@
                                                             type="button" name="{{ $product->id }}"
                                                             value="{{ $carts[$product->id] }}">
                                                         
-                                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
-                                                            id="btn-up">
+                                                        <div class="btn-num-product-up btn-up cl8 hov-btn3 trans-04 flex-c-m">
                                                             <i class="fs-16 zmdi zmdi-plus"></i>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="column-5">{!! $product->price_sale==0 ? number_format($carts[$product->id] * $product->price) : number_format($carts[$product->id] * $product->price_sale) !!} VND</td>
+                                                <td class="column-5 total">{!! $product->price_sale==0 ? number_format($carts[$product->id] * $product->price) : number_format($carts[$product->id] * $product->price_sale) !!} VND</td>
                                                 @php
                                                     $product->price_sale==0 ? ($total += $carts[$product->id] * $product->price) : ($total += $carts[$product->id] * $product->price_sale);
                                                 @endphp
@@ -108,11 +106,6 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-                                <input formaction="/update-carts"
-                                    class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
-                                    type="submit" value="Update Cart">
                             </div>
                         </div>
                     </div>
@@ -130,7 +123,7 @@
                                 </div>
 
                                 <div class="size-209">
-                                    <span class="mtext-110 cl2" name="price" value=>
+                                    <span class="mtext-110 cl2 total-price" name="price" value=>
                                         {!! number_format($total) !!} VND
                                     </span>
                                 </div>
@@ -190,7 +183,7 @@
                                 </div>
 
                                 <div class="size-209 p-t-1">
-                                    <span class="mtext-110 cl2">
+                                    <span class="mtext-110 cl2 total-price">
                                         {!! number_format($total) !!} VND
                                     </span>
                                 </div>
@@ -425,21 +418,39 @@
             loadDistrict();  
         })
 
+        Number.prototype.format = function(n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
 
+     
 
-        $('#btn-up, #btn-down').click(function(){
-            const id = $(".num-product").attr("name");
-            const num = $('.num-product').val();   
+        $('.btn-up, .btn-down').click(function(){
+            const parent = $(this).parent();
+            const price =  $(this).closest('.table_row').find('.price').html();
+            const id = parent.children(".num-product").attr("name");
+            const num = parent.children('.num-product').val();   
             $.ajax({
                 type:'post',
                 datatype:'json',
                 data:{id,num},
                 url:'/update-carts',
                 success:function(result){
-                    
-                }
+                    const total = ((price.split(' ')[0]).replace(',',''))*num;
+                    parent.closest('.table_row').find('.column-5').html(total.format() + ' VND');
+                    var elems = document.querySelectorAll('.total'),arr   = [];
+                    for (var i=elems.length; i--;) arr.push(elems[i].innerHTML);
+                    var totalPrice = 0;
+                    arr.forEach(function(item){
+                        totalPrice += parseInt((item.split(' ')[0]).replace(',',''));
+
+                    });
+
+                    $('.total-price').html(totalPrice.format()+ ' VND');
+                }   
             })
         })
+        
     })
     
 </script>

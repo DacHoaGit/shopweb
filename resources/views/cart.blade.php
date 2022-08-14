@@ -29,12 +29,12 @@
                             </a>
 
                             <span class="header-cart-item-info">
-                                {{$product->qty}} x {{$product->price_sale}}
+                                {{$product->qty}} x {{$product->price_sale == 0 ? $product->price : $product->price_sale}}
                             </span>
                         </div>
                     </li>
                     @php
-                        $total += $product->qty * $product->price_sale
+                        $total += $product->qty * ($product->price_sale == 0 ? $product->price : $product->price_sale)
                     @endphp
                 @endforeach
             </ul>

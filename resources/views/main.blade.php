@@ -11,6 +11,7 @@
 	<!-- Cart -->
 	@include('cart')
 
+	
 
 	<!-- Slider -->
 	<section class="section-slide">

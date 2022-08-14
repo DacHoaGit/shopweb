@@ -31,7 +31,6 @@ class LoginController extends Controller
             'password'=>$request->input('password'),
             // 'level'=>1
         ],$request->input('remember'))){
-
             return redirect()->route('admin');
         }
         Session::flash('error', 'Email or password wrong');
@@ -41,7 +40,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('admin/users/login');
+        return redirect('login');
     }
 
 }

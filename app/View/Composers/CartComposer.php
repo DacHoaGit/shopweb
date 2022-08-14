@@ -16,17 +16,28 @@ class CartComposer
     }
  
     public function compose(View $view)
-    {
+    {   
         $carts=  Session::get('carts');
         if(isset($carts)){
-            $productId = array_keys($carts);
-            $products = Product::query()->where('active', 0)
-                ->whereIn('id', $productId)->get()
+            
+            $productIds = array_keys($carts);
+
+            // delete products not active in session
+            $ProductNoActives = Product::query()->whereIn('id', $productIds)->where('active', 1)->get();
+            foreach ($ProductNoActives as $each){
+                unset($carts[$each->id]);
+            }
+            Session::put('carts', $carts);
+            //
+            $products = Product::query()->whereIn('id', $productIds)
+                ->where('active', 0)
+                ->get()
                 ->map(function($each)use ($carts){
                     $each->qty = $carts[$each->id];
-                    return $each;
+                        return $each;
                 });
             $view->with('productCarts', $products);
         }
+
     }
 }

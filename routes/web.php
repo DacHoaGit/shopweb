@@ -30,10 +30,8 @@ use App\Http\Controllers\TestController;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-Route::get('admin/users/login', [LoginController::class,'index'])->name('login');
-Route::post('admin/users/login/store', [LoginController::class,'store']);
-Route::get('admin/logout', [LoginController::class,'logout']);
-Route::middleware(['auth'])->group(function () {
+Route::get('/logout', [LoginController::class,'logout']);
+Route::middleware(['admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('main', [HomeController::class,'index'])->name('admin');
         Route::get('/', [HomeController::class,'index'])->name('admin');
@@ -78,15 +76,27 @@ Route::get('/', [MainController::class,'index'])->name('home');
 Route::post('/services/load-product', [MainController::class,'loadProduct']);
 Route::get('/danh-muc/{id}-{slug}.html', [ControllersMenuController::class,'index']);
 Route::get('/san-pham/{id}-{slug}.html', [ControllersProductController::class,'index']);
-Route::get('/carts', [CartController::class,'show']);
-Route::post('/update-carts', [CartController::class,'update']);
-Route::DELETE('carts/delete',[CartController::class,'delete']);
-Route::post('/carts', [CartController::class,'index']);
-Route::post('/payment', [CartController::class,'addCard']);
 
 
+Route::middleware(['auth'])->group(function(){
+    Route::get('/carts', [CartController::class,'show']);
+    Route::post('/update-carts', [CartController::class,'update']);
+    Route::DELETE('carts/delete',[CartController::class,'delete']);
+    Route::post('/carts', [CartController::class,'index']);
+    Route::post('/payment', [CartController::class,'addCard']);
+});
 
 
 
 Route::get('/test', [TestController::class,'index']);
 
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
