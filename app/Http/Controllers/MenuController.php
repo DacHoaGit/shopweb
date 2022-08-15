@@ -28,4 +28,5 @@ class MenuController extends Controller
             'menu'=>$menu
         ]);
     }
+    
 }

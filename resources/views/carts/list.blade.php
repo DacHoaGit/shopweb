@@ -369,8 +369,6 @@
 
 <script>
     $(document).ready( function(){
-
-
         async function loadDistrict(){
             const selectedVal = $("#select-district").val();
             $('#select-district').empty();
