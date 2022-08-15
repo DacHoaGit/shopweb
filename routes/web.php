@@ -73,6 +73,7 @@ Route::middleware(['admin'])->group(function () {
 });
 
 Route::get('/', [MainController::class,'index'])->name('home');
+Route::get('/search', [MainController::class,'searchProducts']);
 Route::post('/services/load-product', [MainController::class,'loadProduct']);
 Route::get('/danh-muc/{id}-{slug}.html', [ControllersMenuController::class,'index']);
 Route::get('/san-pham/{id}-{slug}.html', [ControllersProductController::class,'index']);
