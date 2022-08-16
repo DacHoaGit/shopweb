@@ -36,24 +36,109 @@
 
 
                 @auth
-                    <div class="wrap-icon-header flex-w flex-r-m">
-
+                    <div class="wrap-icon-header d-flex flex-row flex-r-m">
                         <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ isset($productCarts) ? count($productCarts) : 0 }}">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                                aria-expanded="false">
+                                <span class="account-user-avatar"> 
+                                    <i class="zmdi zmdi-account-circle" ></i>
+                                </span>
+                                <span>
+                                    <span style="margin-top:10px;" class="account-user-name">{{(auth()->user()->name)}}</span>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+                                <!-- item-->
+                                <div class=" dropdown-header noti-title">
+                                    <h6 class="text-overflow m-0">Welcome !</h6>
+                                </div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-account-circle mr-1"></i>
+                                    <span>My Account</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-account-edit mr-1"></i>
+                                    <span>Settings</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-lifebuoy mr-1"></i>
+                                    <span>Support</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-lock-outline mr-1"></i>
+                                    <span>Lock Screen</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="{{route('logout')}}" class="dropdown-item notify-item ">
+                                    <i class="mdi mdi-logout mr-1"></i>
+                                    <span>Logout</span>
+                                </a>
+
+                            </div>
+                        </div>
                     </div>
-                    <ul class="main-menu ">
-                        <li >
-                            <form method="POST" action="{{ route('logout') }}" x-data>
-                                @csrf
-                                    
-                                <x-jet-responsive-nav-link href="{{ route('logout') }}"
-                                               @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
-                                </x-jet-responsive-nav-link>
-                            </form>            
-                        </li>
-                    </ul>
+                    {{-- <ul class="main-menu ">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                                aria-expanded="false">
+                                <span class="account-user-avatar"> 
+                                    <i class="zmdi zmdi-account-circle" ></i>
+                                </span>
+                                <span>
+                                    <span style="margin-top:10px;" class="account-user-name">{{(auth()->user()->name)}}</span>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+                                <!-- item-->
+                                <div class=" dropdown-header noti-title">
+                                    <h6 class="text-overflow m-0">Welcome !</h6>
+                                </div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-account-circle mr-1"></i>
+                                    <span>My Account</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-account-edit mr-1"></i>
+                                    <span>Settings</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-lifebuoy mr-1"></i>
+                                    <span>Support</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-lock-outline mr-1"></i>
+                                    <span>Lock Screen</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="{{route('logout')}}" class="dropdown-item notify-item ">
+                                    <i class="mdi mdi-logout mr-1"></i>
+                                    <span>Logout</span>
+                                </a>
+
+                            </div>
+                        </div>
+                    </ul> --}}
                 @else
                     <div class="wrap-icon-header flex-w flex-r-m">
                         <ul class="main-menu">
@@ -66,6 +151,7 @@
                         </ul>
                     </div>	
                 @endauth
+                
             </nav>
         </div>	
     </div>

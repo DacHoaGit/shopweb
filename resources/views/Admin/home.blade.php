@@ -44,7 +44,7 @@
                 </span>
             </a>
 
-            <div class="h-100 " id="left-side-menu-container" data-simplebar>
+            <div class="h-100" style="margin-top:50px;" id="left-side-menu-container" data-simplebar>
 
                 <!--- Sidemenu -->
                 <ul class="metismenu side-nav">
@@ -283,6 +283,10 @@
     <script src="{{asset('js/vendor.min.js')}}"></script>
     <script src="{{asset('js/app.min.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
+
+
+
+    <!-- Datatable Init js -->
     @stack('js')
 </body>
 </html>
