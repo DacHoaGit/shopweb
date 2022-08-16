@@ -26,23 +26,34 @@
             </div>
 
             <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-jet-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <label for="remember_me" class="flex" style="justify-content: space-between">
+                    <div>
+                        <x-jet-checkbox id="remember_me" name="remember" />
+                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    </div>
+                    
+
+                    @if (Route::has('password.request'))
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    @endif
                 </label>
+                
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-jet-button class="ml-4">
+            <div class="flex items-center justify-center mt-4">
+                <x-jet-button >
                     {{ __('Log in') }}
                 </x-jet-button>
             </div>
+
+            <a href="{{route('login-facebook')}}" class="flex items-center justify-center mt-4">
+                <x-jet-secondary-button >
+                    <img width="20px" style="margin-right:8px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png">
+                    Login with google
+                </x-jet-secondary-button>
+            </a>
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>

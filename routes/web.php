@@ -15,7 +15,9 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\MenuController as ControllersMenuController;
 use App\Http\Controllers\ProductController as ControllersProductController;
 use App\Http\Controllers\TestController;
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -100,4 +102,31 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+// The Email Verification Notice
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+// The Email Verification Handler
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+// Resending The Verification Email
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+
+
+Route::prefix('facebook')->group(function(){
+    Route::get('/login', [LoginController::class,'loginWithGoogle'])->name('login-facebook');
+    Route::get('/callback', [LoginController::class,'callBackFromGoogle']);
 });

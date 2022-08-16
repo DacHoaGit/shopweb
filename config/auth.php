@@ -95,6 +95,12 @@ return [
         ],
     ],
 
+    'socialite' => [
+        'drivers' => [
+            'facebook',
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout
