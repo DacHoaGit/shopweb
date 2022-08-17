@@ -56,7 +56,7 @@
 						<input class="mtext-107 cl2 size-114 plh2 p-r-15" id="search-product" type="text" onkeyup="searchProduct(this)" name="search-product" placeholder="Search">
 					</div>	
 					<div  class = "display-search" style="max-height: 42vh; overflow:scroll;">
-						
+			
 					</div>
 				</div>
 			</div>

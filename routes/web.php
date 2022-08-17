@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MenuController as ControllersMenuController;
 use App\Http\Controllers\ProductController as ControllersProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Laravel\Fortify\Http\Controllers\NewPasswordController;
 use Laravel\Socialite\Facades\Socialite;
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +89,9 @@ Route::middleware(['auth'])->group(function(){
     Route::DELETE('carts/delete',[CartController::class,'delete']);
     Route::post('/carts', [CartController::class,'index']);
     Route::post('/payment', [CartController::class,'addCard']);
+    Route::get('/profile', [ProfileController::class,'index']);
+    Route::post('/profile', [ProfileController::class,'changeName']);
+    Route::post('/profile', [ProfileController::class,'changePassWord']);
 });
 
 
