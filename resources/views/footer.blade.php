@@ -74,7 +74,6 @@
 
 <!--===============================================================================================-->
 	<script src="{{asset("template/js/main.js")}}"></script>
-	<script src="{{asset("template/js/loadmore.js")}}"></script>
 	<script src="{{asset("js/main.js")}}"></script>
 	<script src="{{asset("template/js/search-product.js")}}"></script>
 
