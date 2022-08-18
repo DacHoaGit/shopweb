@@ -68,7 +68,7 @@
                                 <a href="/admin/menus/add">Add Catalog</a>
                             </li>
                             <li>
-                                <a href="/admin/menus/list">List Catalog</a>
+                                <a href="/admin/menus/list">List Catalogs</a>
                             </li>
                         </ul>
                     </li>
@@ -84,7 +84,7 @@
                                 <a href="/admin/products/add">Add Product</a>
                             </li>
                             <li>
-                                <a href="/admin/products/list">List Product</a>
+                                <a href="/admin/products/list">List Products</a>
                             </li>
                         </ul>
                     </li>
@@ -100,7 +100,22 @@
                                 <a href="/admin/sliders/add">Add Slider</a>
                             </li>
                             <li>
-                                <a href="/admin/sliders/list">List Slider</a>
+                                <a href="/admin/sliders/list">List Sliders</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-cart"></i>
+                            <span> Payment </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="/admin/payments/add">Add Payment</a>
+                            </li>
+                            <li>
+                                <a href="/admin/payments/list">List Payments</a>
                             </li>
                         </ul>
                     </li>

@@ -60,9 +60,9 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="/my-order" class="dropdown-item notify-item">
                                     <i class="mdi mdi-account-edit mr-1"></i>
-                                    <span>Settings</span>
+                                    <span>My Order</span>
                                 </a>
 
                                 <!-- item-->
@@ -190,9 +190,9 @@
                 </a>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="/my-order" class="dropdown-item notify-item">
                     <i class="mdi mdi-account-edit mr-1"></i>
-                    <span>Settings</span>
+                    <span>My Order</span>
                 </a>
 
                 <!-- item-->

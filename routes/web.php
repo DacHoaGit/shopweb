@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CartController as AdminCartController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\MainController as ControllersMainController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MenuController as ControllersMenuController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController as ControllersProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
@@ -67,10 +69,23 @@ Route::middleware(['admin'])->group(function () {
             Route::post('edit/{slider}',[SliderController::class,'update']);
             Route::DELETE('destroy',[SliderController::class,'destroy']);
         });
-        Route::get('customer',[AdminCartController::class,'index']);
-        Route::get('customer/detail/{customer}',[AdminCartController::class,'detail']);
-        Route::post('customer/update/',[AdminCartController::class,'update']);
 
+        Route::prefix('customer')->group(function () {
+            Route::get('',[AdminCartController::class,'index']);
+            Route::get('/detail/{customer}',[AdminCartController::class,'detail']);
+            Route::post('update/',[AdminCartController::class,'update']);
+        });
+
+        Route::prefix('payments')->group(function () {
+            Route::get('add',[PaymentController::class,'create']);
+            Route::post('add',[PaymentController::class,'store']);
+            Route::get('list',[PaymentController::class,'index']);
+            Route::get('edit/{payment}',[PaymentController::class,'show']);
+            Route::post('edit/{payment}',[PaymentController::class,'update']);
+            Route::DELETE('destroy',[PaymentController::class,'destroy']);
+        });
+        
+        
         Route::post('upload',[UploadController::class,'store'])->name('upload');
     });
     
@@ -89,9 +104,12 @@ Route::middleware(['auth'])->group(function(){
     Route::DELETE('carts/delete',[CartController::class,'delete']);
     Route::post('/carts', [CartController::class,'index']);
     Route::post('/payment', [CartController::class,'addCard']);
+
     Route::get('/profile', [ProfileController::class,'index']);
     Route::post('/profile', [ProfileController::class,'changeName']);
     Route::post('/profile', [ProfileController::class,'changePassWord']);
+
+    Route::get('/my-order', [OrderController::class,'index']);
 });
 
 
