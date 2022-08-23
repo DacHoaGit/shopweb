@@ -8,6 +8,11 @@
         <label>Name</label>
         <input type="text" name="name" class="form-control">
     </div>
+
+    <div class="form-group">
+        <label>Name Bank</label>
+        <input type="text" name="name_bank" class="form-control">
+    </div>
     
     <div class="form-group">
         <label>Bank Number</label>

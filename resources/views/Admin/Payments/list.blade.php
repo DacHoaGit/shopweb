@@ -10,6 +10,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Name Bank</th>
                     <th>Bank Number</th>
                     <th>Active</th>
                     <th>Action</th>
@@ -21,6 +22,7 @@
                     <tr>
                         <td>{{$payment->id}}</td>
                         <td>{{$payment->name}}</td>
+                        <td>{{$payment->name_bank}}</td>
                         <td>{{$payment->bank_number}}</td>
                         <td><img src="{{$payment->thumb}}" height="100" alt="" ></td>
                         <td>{!!($payment->active==0)? '<span class="badge badge-success">Active</span>':'<span class="badge badge-danger">Deactive</span>'!!}</td>
