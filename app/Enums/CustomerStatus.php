@@ -9,7 +9,8 @@ use BenSampo\Enum\Enum;
  */
 final class CustomerStatus extends Enum
 {
-    public const PROCESSING =   0;
-    public const DELIVERED =   1;
-    public const CANCELLED = 2;
+    public const UNPAID =   0;
+    public const PROCESSING =   1;
+    public const DELIVERED =   2;
+    public const CANCELLED = 3;
 }
