@@ -56,19 +56,19 @@
         <form class="bg0 p-t-75 p-b-85" method="POST" action="/payment">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
-
+                    <div class="col-lg-10 col-xl-8 m-lr-auto m-b-50">
                         <div class="m-l-25 m-r--38 m-lr-0-xl">
                             <div class="wrap-table-shopping-cart">
                                 <table class="table-shopping-cart">
                                     <tbody>
                                         <tr class="table_head">
                                             <th class="column-1">Product</th>
-                                            <th class="column-2"></th>
-                                            <th class="column-3">Price</th>
-                                            <th class="column-4">Quantity</th>
-                                            <th class="column-5">Total</th>
-                                            <th class="column-6">&nbsp</th>
+                                            <th class="column-1">Name</th>
+                                            <th class="column-1">Price</th>
+                                            <th class="column-1">Quantity</th>
+                                            <th class="column-1">Total</th>
+                                            <th class="column-1">Note</th>
+                                            <th class="column-1"></th>
                                         </tr>
                                         @foreach ($products as $product)
                                             <tr class="table_row">
@@ -78,9 +78,9 @@
                                                     </div>
                                                 </td>
                                                 <td class="column-2">{{ $product->name }}</td>
-                                                <td class="column-3 price">{!! $product->price_sale==0 ? number_format($product->price) : number_format($product->price_sale) !!} VND</td>
-                                                <td class="column-4">
-                                                    <div class="wrap-num-product flex-w m-l-auto m-r-0">
+                                                <td class="column-2 price">{!! $product->price_sale==0 ? number_format($product->price) : number_format($product->price_sale) !!} VND</td>
+                                                <td class="column-2">
+                                                    <div class="wrap-num-product flex-w m-l-5 m-r-0">
                                                         <div class="btn-num-product-down btn-down cl8 hov-btn3 trans-04 flex-c-m">
                                                             <i class="fs-16 zmdi zmdi-minus"></i>
                                                         </div>
@@ -94,11 +94,18 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="column-5 total">{!! $product->price_sale==0 ? number_format($carts[$product->id] * $product->price) : number_format($carts[$product->id] * $product->price_sale) !!} VND</td>
+                                                <td class=" column-2 total">{!! $product->price_sale==0 ? number_format($carts[$product->id] * $product->price) : number_format($carts[$product->id] * $product->price_sale) !!} VND</td>
                                                 @php
                                                     $product->price_sale==0 ? ($total += $carts[$product->id] * $product->price) : ($total += $carts[$product->id] * $product->price_sale);
                                                 @endphp
-                                                <td class="p-r-20">
+                                                </td>
+                                                <td class="column-2">
+                                                    <div class="border border-secondary bg0 ">
+                                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text"
+                                                            name="note_product[{{$product->id}}]" placeholder="Note">
+                                                    </div>
+                                                </td>
+                                                <td class="column-1 p-r-20">
                                                     <a class="pointer bg15 bor13 p-lr-15"
                                                         onclick="removeRow({{ $product->id }},'/carts/delete')">Delete</a>
                                                 </td>
@@ -109,7 +116,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+                    <div class="col-sm-10 col-lg-7 col-xl-4 m-lr-auto m-b-50">
                         <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
                             <h4 class="mtext-109 cl2 p-b-30">
                                 Cart Totals

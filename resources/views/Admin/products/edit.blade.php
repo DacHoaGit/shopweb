@@ -71,20 +71,14 @@
                 dataType: 'json',
                 data: {page: {{ request()->get('page') ?? 1 }} },
                 success: function (response) {
-                    // console.log(data);
                     response.data.forEach(function (each) {
                         if(each.id=={{$product->menu_id}}){
-                            console.log(10);
                             $("#parent_id").append("<option selected value="+each.id+">"+each.name+"</option>");
                         }
                         else{
-                            console.log(12);
-
-
                             $("#parent_id").append("<option value="+each.id+">"+each.name+"</option>");
                         }
                     });
-                    // renderPagination(response.data.pagination);
                 },
                 error: function (response) {
 
@@ -100,11 +94,6 @@
             });
         $('#upload_product').change(function(){
             $("#name_photo").text(this.files[0].name)
-            
-            
-            
-
-            alert('gaga');
             var formData = new FormData();
             formData.append('file', $('#upload_product').get(0).files[0]);
             $.ajax({
