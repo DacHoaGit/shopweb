@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone');
             $table->text('note');
+            $table->integer('status')->default(0);
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

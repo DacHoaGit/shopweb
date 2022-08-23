@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        if(!Schema::hasColumn('customers','status')){
-            Schema::table('customers', function (Blueprint $table) {
-                $table->integer('status')->after('note')->default(0);
+        if(!Schema::hasColumn('users', 'role')){
+            Schema::table('users', function (Blueprint $table) {
+                $table->integer('role')->default(1);
             });
         }
-
     }
 
     /**
@@ -28,11 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        
-        if(Schema::hasColumn('customers','status')){
-            Schema::table('customers', function (Blueprint $table) {
-                $table->dropColumn('status');
-            });
-        }
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('users', 'rule')) {
-            Schema::table('users', function (Blueprint $table) {
-                $table->integer('rule')->default(0);
+        if (Schema::hasColumn('payments', 'bank_number')) {
+            Schema::table('payments', function (Blueprint $table) {
+                $table->string('bank_number')->change();
             });
         }
     }
@@ -27,10 +27,5 @@ return new class extends Migration
      */
     public function down()
     {
-        if(Schema::hasColumn('users','rule')){
-            Schema::table('users', function (Blueprint $table) {
-                $table->dropColumn('rule');
-            });
-        }
     }
 };
