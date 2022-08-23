@@ -20,9 +20,10 @@
     <input type="hidden" id="customer" value="{{$customer->id}}">
 
     <div class="text-lg-right">
-        <button type="button" class="btn-status btn btn-light mb-2" id="btn-0" value="0" >Processing</button>
-        <button type="button" class="btn-status btn btn-light mb-2" id="btn-1" value="1">Shipped</button>
-        <button type="button" class="btn-status btn btn-light mb-2" id="btn-2" value="2">Cancelled</button>
+        <button type="button" class="btn-status btn btn-light mb-2" id="btn-0" value="0" >UNPAID</button>
+        <button type="button" class="btn-status btn btn-light mb-2" id="btn-1" value="1">PROCESSING</button>
+        <button type="button" class="btn-status btn btn-light mb-2" id="btn-2" value="2">DELIVERED</button>
+        <button type="button" class="btn-status btn btn-light mb-2" id="btn-2" value="3">CANCELLED</button>
     </div>
 
     <table class="table table-striped table-centered mb-0" id="table-data">
@@ -33,6 +34,7 @@
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Total</th>
+                    <th>Note</th>
                     <th>Image</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -46,6 +48,7 @@
                         <td>{{$cart->quantity}}</td>
                         <td>{{$cart->price}}</td>
                         <td>{{($cart->price)*($cart->quantity)}}</td>
+                        <td>{{$cart->note}}</td>
                         <td><img src="{{asset($cart->product->thumb)}}" style="width:100px;" alt=""></td>
                         <td>&nbsp;</td>
                     </tr>

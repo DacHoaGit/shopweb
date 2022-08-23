@@ -1,6 +1,7 @@
 @extends('admin.home')
 @section('content')
-    <table class="table table-striped table-centered mb-0" id="table-data">
+<div class="tab-content">
+    <table class="table table-striped table-centered mb-0"  id="table-data">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -10,7 +11,6 @@
                     <th>Order Status</th>
                     <th>Update</th>
                     <th>Actions</th>
-                    <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,8 +22,10 @@
                         <td>{{$customer->phone}}</td>
                         <td>
                             @if ($customer->status==0)
-                                <span class="badge badge-warning-lighten">Processing</span>
+                                <span class="text-muted">{{App\Enums\CustomerStatus::getKey($customer->status)}}</span>
                             @elseif ($customer->status==1)
+                                <span class="badge badge-warning-lighten">{{App\Enums\CustomerStatus::getKey($customer->status)}}</span>
+                            @elseif ($customer->status==2)
                                 <span class="badge badge-info-lighten">Shipped</span>
                             @else
                                 <span class="badge badge-danger-lighten">Cancelled</span>
@@ -34,10 +36,10 @@
                             <a href="/admin/customer/detail/{{$customer->id}}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
                             <a href="#" class="action-icon btn-delete" onclick="removeRow({{$customer->id}},'/admin/customer/destroy')"> <i class="mdi mdi-delete"></i></a>
                         </td>
-                        <td>&nbsp;</td>
                     </tr>
                 @endforeach
             </tbody>
     </table>
     {!!$customers -> links('pagination::bootstrap-4') !!}
+</div>
 @endsection
