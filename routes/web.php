@@ -40,6 +40,7 @@ Route::get('/logout', [LoginController::class,'logout']);
 Route::middleware(['admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('main', [HomeController::class,'index'])->name('admin');
+        Route::post('main/filter-day', [HomeController::class,'filterDay']);
         Route::get('/', [HomeController::class,'index'])->name('admin');
 
         Route::prefix('menus')->group(function () {
@@ -85,7 +86,7 @@ Route::middleware(['admin'])->group(function () {
             Route::DELETE('destroy',[PaymentController::class,'destroy']);
         });
         
-        
+
         Route::post('upload',[UploadController::class,'store'])->name('upload');
     });
     
@@ -110,6 +111,9 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/profile', [ProfileController::class,'changePassWord']);
 
     Route::get('/my-order', [OrderController::class,'index']);
+    Route::get('/payment/{customer}', [OrderController::class,'payment']);
+    Route::post('/payment/update', [OrderController::class,'updatePayment']);
+
 });
 
 
