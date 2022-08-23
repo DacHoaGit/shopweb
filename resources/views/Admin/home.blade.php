@@ -14,6 +14,8 @@
     <link href="{{asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/app.min.css')}}" rel="stylesheet" type="text/css" id="light-style" />
     <link href="{{asset('css/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="dark-style" />
+
+    
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
 </head>
@@ -298,7 +300,6 @@
     <script src="{{asset('js/vendor.min.js')}}"></script>
     <script src="{{asset('js/app.min.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
-
 
 
     <!-- Datatable Init js -->

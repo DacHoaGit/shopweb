@@ -32,7 +32,6 @@ class MainController extends Controller
         ]);
     }
 
-
     public function loadProduct(Request $request){
         $page = $request->input('page',0);
         $result = Product::where('active',0)->orderByDesc('id')->offset($page*16)->limit(16)->get();
@@ -43,6 +42,7 @@ class MainController extends Controller
         }
         return response()->json(['html'=>'']);
     }
+
     public function searchProducts(Request $request){
         $products = Product::where('active', 0)->where('name','like',"%{$request->input('q')}%")->get();
         if(count($products)>0){
