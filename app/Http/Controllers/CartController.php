@@ -77,6 +77,8 @@ class CartController extends Controller
 
     public function addCard(Request $request){
         $address = $request->input('ward').', '.$request->input('district').', '.$request->input('city');
+        $arr_notes = $request->input('note_product');
+        // dd(auth()->user()->id);
         try {
 
             DB::beginTransaction();
@@ -90,14 +92,18 @@ class CartController extends Controller
                 'address' =>$address,
                 'phone' =>$request->input('phone'),
                 'note' =>$request->input('note'),
+                'user_id' => auth()->user()->id
             ]);
 
             $productId = array_keys($carts);
             $products = Product::where('active',0)->whereIn('id', $productId)->get();
 
+
             foreach ($products as $product) {
+                // dd(($request->input('note_product'))[$product->id]);
                 Cart::create([
                     'customer_id' =>$customer->id,
+                    'note' => $arr_notes[$product->id],
                     'product_id' =>$product->id,
                     'quantity' =>$carts[$product->id],
                     'price' =>$product->price_sale == 0 ? $product->price : $product->price_sale,
