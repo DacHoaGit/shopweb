@@ -6,16 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Yajra\DataTables\Facades\DataTables;
 
 class CartController extends Controller
 {
     public function index()
     {
-        $customers = Customer::orderByDesc('id')->paginate(10);
         return view('admin.customer.list',[
             'title' => 'Customer List',
-            'customers' => $customers
         ]);
+    }
+
+    public function showCustomer(){
+        return DataTables::of(Customer::orderBy('id', 'DESC'))->make(true);
     }
 
     public function detail(Customer $customer)
