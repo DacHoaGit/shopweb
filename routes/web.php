@@ -39,14 +39,16 @@ use Laravel\Socialite\Facades\Socialite;
 Route::get('/logout', [LoginController::class,'logout']);
 Route::middleware(['admin'])->group(function () {
     Route::prefix('admin')->group(function () {
-        Route::get('main', [HomeController::class,'index'])->name('admin');
-        Route::post('main/filter-day', [HomeController::class,'filterDay']);
         Route::get('/', [HomeController::class,'index'])->name('admin');
+        Route::get('main', [HomeController::class,'index'])->name('admin');
+        Route::post('main/filter-day', [HomeController::class,'filterDay'])->name('filterDay');
+        // Route::post('main/filter-product', [HomeController::class,'filterProduct']);
 
         Route::prefix('menus')->group(function () {
             Route::get('add',[MenuController::class,'create']);
             Route::post('add',[MenuController::class,'store']);
             Route::get('list',[MenuController::class,'index']);
+            Route::get('api',[MenuController::class,'showMenu'])->name('api-show-menu');
             Route::get('listApi',[MenuController::class,'list'])->name('listApi');
             Route::get('edit/{menu}',[MenuController::class,'show']);
             Route::post('edit/{menu}',[MenuController::class,'update']);
@@ -57,6 +59,7 @@ Route::middleware(['admin'])->group(function () {
             Route::get('add',[ProductController::class,'create']);
             Route::post('add',[ProductController::class,'store']);
             Route::get('list',[ProductController::class,'index']);
+            Route::get('api',[ProductController::class,'showProduct'])->name('api-show-product');
             Route::get('edit/{product}',[ProductController::class,'show']);
             Route::post('edit/{product}',[ProductController::class,'update']);
             Route::DELETE('destroy',[ProductController::class,'destroy']);
@@ -66,6 +69,7 @@ Route::middleware(['admin'])->group(function () {
             Route::get('add',[SliderController::class,'create']);
             Route::post('add',[SliderController::class,'store']);
             Route::get('list',[SliderController::class,'index']);
+            Route::get('api',[SliderController::class,'showSlider'])->name('api-show-slider');
             Route::get('edit/{slider}',[SliderController::class,'show']);
             Route::post('edit/{slider}',[SliderController::class,'update']);
             Route::DELETE('destroy',[SliderController::class,'destroy']);
@@ -73,6 +77,7 @@ Route::middleware(['admin'])->group(function () {
 
         Route::prefix('customer')->group(function () {
             Route::get('',[AdminCartController::class,'index']);
+            Route::get('api',[AdminCartController::class,'showCustomer'])->name('api-show-customer');
             Route::get('/detail/{customer}',[AdminCartController::class,'detail']);
             Route::post('update/',[AdminCartController::class,'update']);
         });
@@ -81,6 +86,7 @@ Route::middleware(['admin'])->group(function () {
             Route::get('add',[PaymentController::class,'create']);
             Route::post('add',[PaymentController::class,'store']);
             Route::get('list',[PaymentController::class,'index']);
+            Route::get('api',[PaymentController::class,'showPayment'])->name('api-show-payment');
             Route::get('edit/{payment}',[PaymentController::class,'show']);
             Route::post('edit/{payment}',[PaymentController::class,'update']);
             Route::DELETE('destroy',[PaymentController::class,'destroy']);
@@ -118,7 +124,7 @@ Route::middleware(['auth'])->group(function(){
 
 
 
-Route::get('/test', [TestController::class,'index']);
+Route::get('/test', [TestController::class,'test']);
 
 
 Route::middleware([
