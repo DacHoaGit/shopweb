@@ -21,7 +21,7 @@ class MenuController extends Controller
         $products = $menu->products()->where('active', 0);
         if($request->input('price')){
             $products->orderBy('price_sale',$request->input('price'));
-        }
+        }   
         return view('menu',[
             'title'=>$menu->name,
             'products'=>$products->orderByDesc('id')->paginate(4)->appends(request()->query()),

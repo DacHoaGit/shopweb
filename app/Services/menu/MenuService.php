@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\menu;
+namespace App\Http\Services\Menu;
 
 use App\Models\Menu;
 use Illuminate\Contracts\Session\Session;
