@@ -7,6 +7,7 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Yajra\DataTables\Facades\DataTables;
 
 class PaymentController extends Controller
 {
@@ -30,11 +31,14 @@ class PaymentController extends Controller
     }
 
     public function index(){
-        $payments = Payment::orderByDesc('id')->paginate(15);
+        
         return view('admin.payments.list',[
             'title' => 'List Payments',
-            'payments' => $payments,
         ]);
+    }
+
+    public function showPayment(){
+        return DataTables::of(Payment::orderBy('id', 'DESC'))->make(true);
     }
 
     public function show(Payment $payment){

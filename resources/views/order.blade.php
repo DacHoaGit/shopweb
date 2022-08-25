@@ -85,7 +85,7 @@
                                 @endif
                             </td>
                             <td>{{$customer->created_at}}</td>
-                            <td><a href="/payment/{{$customer->id}}" class="btn btn-info">Continute to Payment</a></td>
+                            <td><a href="/payment/{{$customer->id}}" class="btn btn-info">{!! $customer->status==0 ? 'Continute to Payment' : 'See Details' !!}</a></td>
                         </tr>
                         
                     @endforeach

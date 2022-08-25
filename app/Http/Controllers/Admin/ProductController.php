@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductRequest;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
-
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
@@ -16,16 +17,30 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $products = Product::with('menu')->orderBy('id')->paginate(10);
+        
+        $products = Product::with('menu');
+        if(!empty(request()->input('date'))){
+            $date = $request->input('date');
+            $from = Carbon::parse($date[0])->startOfDay();
+            $to = Carbon::parse($date[1])->endOfDay();
+            $products = $products->whereBetween('created_at',[$from,$to]);
+        }
+        $products = $products->orderByDesc('id')->paginate(10);
         // dd($products);
         return view('admin.products.list',[
             'title' => 'List Products',
             'products' => $products
         ]);
         
+    }
+
+    public function showProduct(){
+        
+        return DataTables::of(Product::with('menu'))->addColumn('menu', function($row){
+            return $row->menu->name;
+        })->make(true);
     }
 
     /**

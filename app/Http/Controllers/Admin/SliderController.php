@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Slider\SliderRequest;
 use App\Models\Product;
-use App\Models\slider;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
 
 class SliderController extends Controller
 {
@@ -19,14 +20,14 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $sliders = Slider::orderByDesc('id')->paginate(15);
-        // dd($sliders);
         return view('admin.sliders.list',[
             'title' => 'List sliders',
-            'sliders' => $sliders
         ]);
     }
 
+    public function showSlider(){
+        return DataTables::of(Slider::orderBy('id', 'DESC'))->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *

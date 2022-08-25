@@ -14,7 +14,8 @@
     <link href="{{asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/app.min.css')}}" rel="stylesheet" type="text/css" id="light-style" />
     <link href="{{asset('css/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="dark-style" />
-
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"/>
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
@@ -298,11 +299,19 @@
 
     <!-- bundle -->
     <script src="{{asset('js/vendor.min.js')}}"></script>
+
     <script src="{{asset('js/app.min.js')}}"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
     <script src="{{asset('js/main.js')}}"></script>
 
 
     <!-- Datatable Init js -->
     @stack('js')
+
+    
 </body>
 </html>

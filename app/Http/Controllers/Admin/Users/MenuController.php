@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\users;
+namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\menu\CreateFormRequest;
@@ -9,6 +9,7 @@ use App\Models\Menu;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 class MenuController extends Controller
 {
@@ -34,6 +35,10 @@ class MenuController extends Controller
             'menu'=>$menu,
             'menus'=> $this->model->where('parent_id', 0)->get(),
         ]);
+    }
+
+    public function showMenu(){
+        return DataTables::of(Menu::orderBy('id', 'DESC'))->make(true);
     }
     
     public function update(Menu $menu, CreateFormRequest $request){
@@ -69,11 +74,9 @@ class MenuController extends Controller
     }
 
     public function index(){
-        $menus = $this->model->orderBy('id', 'DESC')->paginate(20);
 
         return view('admin.menus.list',[
             'title'=>'Category List',
-            'menus'=>$menus
         ]);
     }
 
