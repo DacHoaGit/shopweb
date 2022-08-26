@@ -20,24 +20,21 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         
-        $products = Product::with('menu');
-        if(!empty(request()->input('date'))){
-            $date = $request->input('date');
-            $from = Carbon::parse($date[0])->startOfDay();
-            $to = Carbon::parse($date[1])->endOfDay();
-            $products = $products->whereBetween('created_at',[$from,$to]);
-        }
-        $products = $products->orderByDesc('id')->paginate(10);
-        // dd($products);
         return view('admin.products.list',[
             'title' => 'List Products',
-            'products' => $products
         ]);
         
     }
 
-    public function showProduct(){
+    public function showProduct(Request $request){
         
+        if(!is_null($request->input('start_date'))){
+            $start = $request->input('start_date');
+            $end = $request->input('end_date');
+            return DataTables::of(Product::whereBetween('created_at',[$start,$end])->with('menu'))->addColumn('menu', function($row){
+                return $row->menu->name;
+            })->make(true);
+        }
         return DataTables::of(Product::with('menu'))->addColumn('menu', function($row){
             return $row->menu->name;
         })->make(true);

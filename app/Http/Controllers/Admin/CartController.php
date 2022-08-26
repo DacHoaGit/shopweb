@@ -17,7 +17,13 @@ class CartController extends Controller
         ]);
     }
 
-    public function showCustomer(){
+    public function showCustomer(Request $request){
+
+        if(!is_null($request->input('start_date'))){
+            $start = $request->input('start_date');
+            $end = $request->input('end_date');
+            return DataTables::of(Customer::whereBetween('created_at',[$start,$end])->orderBy('id', 'DESC'))->make(true);
+        }
         return DataTables::of(Customer::orderBy('id', 'DESC'))->make(true);
     }
 

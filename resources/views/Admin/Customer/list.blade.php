@@ -48,50 +48,90 @@
 @push('js')
 <script>
     $(document).ready( function () {
-        $('#table-data').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax": '{{ route('api-show-customer') }}',
+        function fetch_data(start_date='',end_date=''){
+            $('#table-data').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    url:'{{ route("api-show-customer") }}',
+                    type:"POST",
+                    data:{start_date,end_date},
+                },
+                "columns": [
+                { "data": "id" },
+                { "data": "name" },
+                { "data": "address"},
+                { "data": "phone"},
+                { "data": "updated_at"},],
 
-            "columns": [
-            { "data": "id" },
-            { "data": "name" },
-            { "data": "address"},
-            { "data": "phone"},
-            { "data": "updated_at"},],
-
-            "columnDefs": [
-            {
-                "targets": 5,
-                "data": "status",
-                "render": function ( data, type, row, meta ) {
-                    switch (data){
-                        case 0:
-                            return '<span class="text-muted">UNPAID</span>';
-                        case 1:
-                            return '<span class="badge badge-warning-lighten">PROCESSING</span>';
-                        case 2:
-                            return '<span class="badge badge-info-lighten">DELIVERED</span>';
-                        default:
-                            return '<span class="badge badge-danger-lighten">CANCELLED</span>';
+                "columnDefs": [
+                {
+                    "targets": 5,
+                    "data": "status",
+                    "render": function ( data, type, row, meta ) {
+                        switch (data){
+                            case 0:
+                                return '<span class="text-muted">UNPAID</span>';
+                            case 1:
+                                return '<span class="badge badge-warning-lighten">PROCESSING</span>';
+                            case 2:
+                                return '<span class="badge badge-info-lighten">DELIVERED</span>';
+                            default:
+                                return '<span class="badge badge-danger-lighten">CANCELLED</span>';
+                        }
                     }
-                }
-            },
-            {
-                "targets": 6,
-                "data": "id",
-                
-                "render": function ( data, type, row, meta ) {
-                    return '<a href="/admin/customer/detail/'+data+'" class="action-icon"> <i class="mdi mdi-eye"></i></a><a href="#" class="action-icon btn-delete"> <i class="mdi mdi-delete"></i></a>';
-                }
-            },
-            ]
-        });
+                },
+                {
+                    "targets": 6,
+                    "data": "id",
+                    
+                    "render": function ( data, type, row, meta ) {
+                        return '<a href="/admin/customer/detail/'+data+'" class="action-icon"> <i class="mdi mdi-eye"></i></a><a href="#" class="action-icon btn-delete"> <i class="mdi mdi-delete"></i></a>';
+                    }
+                },
+                {
+                    "targets": 4,
+                    "data" : "updated_at",
+                    "render": function ( data, type, row, meta ) {
+                        
+                        return ((data.split('.'))[0]).replace('T',' ');
+                    }
+                },
+                ]
+            });
+        }
+
         $('#table-data tbody').on('click', '.btn-delete', function () {
                 var $table =  $('#table-data').DataTable();
                 var data = $table.row($(this).parents('tr')).data();
                 removeRow(data.id,'/admin/customer/destroy');
         });
-      });
+
+        fetch_data();
+
+        $('#reset-date').click(function(){
+            $('#input-date-from').val('');
+            $('#input-date-to').val('')
+            $('#table-data').DataTable().destroy();
+            fetch_data();
+
+        })
+
+
+        $("#input-date-from,#input-date-to").datepicker(
+        {  
+                dateFormat: 'yy/mm/dd' 
+        
+        }).on("change", function() {
+            var min = $('#input-date-from').val();
+            var max = $('#input-date-to').val();
+            
+            if(min != '' && max != ''){
+                $('#table-data').DataTable().destroy();
+                fetch_data(min,max);
+            }
+        });
+
+    });
 </script>
 @endpush

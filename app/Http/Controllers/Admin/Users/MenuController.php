@@ -37,7 +37,14 @@ class MenuController extends Controller
         ]);
     }
 
-    public function showMenu(){
+    public function showMenu(Request $request){
+
+        if(!is_null($request->input('start_date'))){
+            $start = $request->input('start_date');
+            $end = $request->input('end_date');
+            return DataTables::of(Menu::whereBetween('created_at',[$start,$end])->orderBy('id', 'DESC'))->make(true);
+        }
+        
         return DataTables::of(Menu::orderBy('id', 'DESC'))->make(true);
     }
     

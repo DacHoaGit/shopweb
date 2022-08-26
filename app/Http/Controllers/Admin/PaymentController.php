@@ -37,7 +37,12 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function showPayment(){
+    public function showPayment(Request $request){
+        if(!is_null($request->input('start_date'))){
+            $start = $request->input('start_date');
+            $end = $request->input('end_date');
+            return DataTables::of(Payment::whereBetween('created_at',[$start,$end])->orderBy('id', 'DESC'))->make(true);
+        }
         return DataTables::of(Payment::orderBy('id', 'DESC'))->make(true);
     }
 

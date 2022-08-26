@@ -25,7 +25,14 @@ class SliderController extends Controller
         ]);
     }
 
-    public function showSlider(){
+    public function showSlider(Request $request){
+
+        if(!is_null($request->input('start_date'))){
+            $start = $request->input('start_date');
+            $end = $request->input('end_date');
+            return DataTables::of(Slider::whereBetween('created_at',[$start,$end])->orderBy('id', 'DESC'))->make(true);
+        }
+
         return DataTables::of(Slider::orderBy('id', 'DESC'))->make(true);
     }
     /**
