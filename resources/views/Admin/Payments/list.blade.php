@@ -27,6 +27,10 @@
             $('#table-data').DataTable({
                 "processing": true,
                 "serverSide": true,
+                "dom": 'Blfrtip',
+                "buttons": [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
                 "ajax": {
                     url:'{{ route("api-show-payment") }}',
                     type:"POST",

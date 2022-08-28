@@ -24,9 +24,17 @@
 
         
         function fetch_data(start_date='',end_date=''){
-            $('#table-data').DataTable({
+            
+            $('#table-data').DataTable(
+                
+            {   
+
                 "processing": true,
                 "serverSide": true,
+                "dom": 'Blfrtip',
+                "buttons": [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
                 "ajax": {
                     url:'{{ route("api-show-product") }}',
                     type:"POST",
@@ -68,8 +76,14 @@
                 },
                 
                 ]
-            });
+            },
+            
+
+            
+            );
+
         }
+
 
         $('#table-data tbody').on('click', '.btn-delete', function () {
                 var $table =  $('#table-data').DataTable();

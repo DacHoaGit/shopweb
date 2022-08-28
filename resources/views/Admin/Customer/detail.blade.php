@@ -18,6 +18,10 @@
 
     <input type="hidden" id="status" value="{{$customer->status}}">
     <input type="hidden" id="customer" value="{{$customer->id}}">
+    
+    <div class="text-lg-left">
+        <a href="/admin/customer/export-{{$customer->id}}" id ="export" class="btn btn-danger mb-2" id="btn-0" value="0" >Export</a>
+    </div>
 
     <div class="text-lg-right">
         <button type="button" class="btn-status btn btn-light mb-2" id="btn-0" value="0" >UNPAID</button>
@@ -56,8 +60,8 @@
                 @endforeach
             </tbody>
     </table>
-    <div class="mt-3 mb-3">
-        <h1 style="text-align: right;" class="mr-3 font-16 text-success">Total: {{number_format($total)}}</h1>
+    <div class="text-lg-right mt-2">
+        <span  class="font-16  btn disabled btn-success mb-2" id="btn-2" disabled value="3">Total: {{number_format($total)}}</span>
     </div>
 @endsection
 @push('js')
