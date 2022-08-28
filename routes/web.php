@@ -77,6 +77,7 @@ Route::middleware(['admin'])->group(function () {
             Route::get('',[CartController::class,'index']);
             Route::post('api',[CartController::class,'showCustomer'])->name('api-show-customer');
             Route::get('/detail/{customer}',[CartController::class,'detail']);
+            Route::get('/export-{customer}',[CartController::class,'export'])->name('bill-export');
             Route::post('update/',[CartController::class,'update']);
         });
 
