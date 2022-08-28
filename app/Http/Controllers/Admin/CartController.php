@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\BillExport;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class CartController extends Controller
@@ -51,5 +53,12 @@ class CartController extends Controller
         return response()->json([
             'status' => false,
         ]);
+    }
+    public function export(Customer $customer) {
+        $carts = $customer->cart()->with(['product'=> function($q){
+            $q->select('id', 'name', 'thumb');
+        }])->get();
+
+        return Excel::download(new BillExport($carts,$customer), 'bill.xlsx');
     }
 }
