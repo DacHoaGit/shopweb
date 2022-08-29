@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\Users\LoginController;
 // use App\Http\Controllers\Admin\Users\MainController;
 use App\Http\Controllers\admin\users\MenuController;
-use App\Http\Controllers\MainController as ControllersMainController;
+use App\Http\Controllers\CartController as ControllersCartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MenuController as ControllersMenuController;
@@ -39,6 +39,9 @@ Route::get('/logout', [LoginController::class,'logout']);
 Route::middleware(['admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/', [HomeController::class,'index'])->name('admin');
+        Route::get('/update-cookie', [HomeController::class,'updateCookie']);
+
+        
         Route::post('/filter-day', [HomeController::class,'filterDay'])->name('filterDay');
         // Route::post('main/filter-product', [HomeController::class,'filterProduct']);
 
@@ -105,11 +108,11 @@ Route::get('/san-pham/{id}-{slug}.html', [ControllersProductController::class,'i
 
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/carts', [CartController::class,'show']);
-    Route::post('/update-carts', [CartController::class,'update']);
-    Route::DELETE('carts/delete',[CartController::class,'delete']);
-    Route::post('/carts', [CartController::class,'index']);
-    Route::post('/payment', [CartController::class,'addCard']);
+    Route::get('/carts', [ControllersCartController::class,'show']);
+    Route::post('/update-carts', [ControllersCartController::class,'update']);
+    Route::DELETE('carts/delete',[ControllersCartController::class,'delete']);
+    Route::post('/carts', [ControllersCartController::class,'index']);
+    Route::post('/payment', [ControllersCartController::class,'addCard']);
 
     Route::get('/profile', [ProfileController::class,'index']);
     Route::post('/profile', [ProfileController::class,'changeName']);
