@@ -14,10 +14,14 @@ class CartController extends Controller
 {
     public function index()
     {
+        unset($_COOKIE['countNotify']);
+        setcookie('countNotify','0');
         return view('admin.customer.list',[
             'title' => 'Customer List',
         ]);
     }
+
+    
 
     public function showCustomer(Request $request){
 

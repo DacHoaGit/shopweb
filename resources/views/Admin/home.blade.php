@@ -127,8 +127,9 @@
                         </ul>
                     </li>
                     <li class="side-nav-item">
-                        <a href="/admin/customer" class="side-nav-link">
+                        <a href="/admin/customer" class="dropdown-toggle side-nav-link" >
                             <i class="mdi mdi-account-details"></i>
+                            <span id="count-notify" data-count="0" class="badge badge-success float-right">{{$_COOKIE['countNotify']??''}}</span>
                             <span> Customer </span>
                         </a>
                     </li>
@@ -157,7 +158,7 @@
                     <ul class="list-unstyled topbar-right-menu float-right mb-0">
                         <li class="dropdown notification-list d-lg-none">
                             <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="dripicons-search noti-icon"></i>
+                                <i  class="dripicons-search noti-icon"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
                                 <form class="p-3">
@@ -314,6 +315,72 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 
+    <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+
+    <script type="text/javascript">
+        // var notificationsWrapper   = $('.dropdown-notifications');
+        // var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
+        // var notificationsCountElem = notificationsToggle.find('i[data-count]');
+        // var notificationsCount     = parseInt(notificationsCountElem.data('count'));
+        // var notifications          = notificationsWrapper.find('ul.dropdown-menu');
+    
+    
+        // Enable pusher logging - don't include this in production
+         Pusher.logToConsole = true;
+    
+        var pusher = new Pusher('{{env('PUSHER_APP_KEY')}}', {
+            cluster: 'ap1',
+            encrypted: false
+        });
+        
+        // Subscribe to the channel we specified in our Laravel Event
+        var channel = pusher.subscribe('NotifyOrder');
+        // Bind a function to a Event (the full Laravel class)
+        channel.bind('send-notify', function(data) {
+            var count = $('#count-notify').text();
+        
+            count = parseInt(count)+1;
+            $('#count-notify').text(count);
+            $.ajax({
+                type:'get',
+                datatype:'json',
+                url:'/admin/update-cookie',
+                success:function(result){
+                    
+                }
+            })
+                // $('#count-notify').attr('data-count', parseInt(count));
+
+            // console.log(typeof count);
+            // var existingNotifications = notifications.html();
+            // var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
+            // var newNotificationHtml = `
+            //   <li class="notification active">
+            //       <div class="media">
+            //         <div class="media-left">
+            //           <div class="media-object">
+            //             <img src="https://api.adorable.io/avatars/71/`+avatar+`.png" class="img-circle" alt="50x50" style="width: 50px; height: 50px;">
+            //           </div>
+            //         </div>
+            //         <div class="media-body">
+            //           <strong class="notification-title">`+data.title+`</strong>
+            //           <p class="notification-desc">`+data.content+`</p>
+            //           <div class="notification-meta">
+            //             <small class="timestamp">about a minute ago</small>
+            //           </div>
+            //         </div>
+            //       </div>
+            //   </li>
+            // `;
+            // notifications.html(newNotificationHtml + existingNotifications);
+    
+            // notificationsCount += 1;
+            // notificationsCountElem.attr('data-count', notificationsCount);
+            // notificationsWrapper.find('.notif-count').text(notificationsCount);
+            // notificationsWrapper.show();
+        });
+    </script>
+
 
     <script src="{{asset('js/main.js')}}"></script>
 
@@ -324,3 +391,5 @@
     
 </body>
 </html>
+
+

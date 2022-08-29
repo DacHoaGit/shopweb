@@ -21,6 +21,12 @@ class HomeController extends Controller
 
         ]);
     }
+
+    public function updateCookie(){
+        $count = $_COOKIE['countNotify'] + 1;
+        setcookie('countNotify',$count);
+    }
+
     public function filterDay(Request $request){
         $from = Carbon::parse($request->input('dateFrom'))->startOfDay();
         $to = Carbon::parse($request->input('dateTo'))->endOfDay();

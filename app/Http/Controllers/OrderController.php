@@ -6,6 +6,8 @@ use App\Enums\CustomerStatus;
 use App\Models\Customer;
 use App\Models\Payment;
 use App\Models\User;
+use Pusher\Pusher;
+use Illuminate\Broadcasting\Broadcasters\PusherBroadcaster;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -39,6 +41,21 @@ class OrderController extends Controller
         }
         $customer->status = CustomerStatus::PROCESSING;
         $customer->save();
+
+        $data = 1;
+        $options = array(
+            'cluster' => 'ap1',
+            'encrypted' => false
+        );
+
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $pusher->trigger('NotifyOrder', 'send-notify', $data);
         
         return redirect('my-order');
     }
