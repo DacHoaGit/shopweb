@@ -442,15 +442,19 @@
                 url:'/update-carts',
                 success:function(result){
                     const total = ((price.split(' ')[0]).replace(',',''))*num;
-                    parent.closest('.table_row').find('.column-5').html(total.format() + ' VND');
+                    parent.closest('.table_row').find('.total').html(total.format() + ' VND');
                     var elems = document.querySelectorAll('.total'),arr   = [];
-                    for (var i=elems.length; i--;) arr.push(elems[i].innerHTML);
+                    for (var i=elems.length; i--;)
+
+                        arr.push(elems[i].innerHTML);
+                    
                     var totalPrice = 0;
+
                     arr.forEach(function(item){
                         totalPrice += parseInt((item.split(' ')[0]).replace(',',''));
 
                     });
-
+                    
                     $('.total-price').html(totalPrice.format()+ ' VND');
                 }   
             })
