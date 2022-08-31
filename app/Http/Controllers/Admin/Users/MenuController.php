@@ -89,6 +89,7 @@ class MenuController extends Controller
 
 
     public function destroy(Request $request){
+        
         $id = (int) $request->input('id');
         $menu = Menu::where('id',$id)->first();
         if($menu){
