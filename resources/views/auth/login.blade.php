@@ -54,6 +54,9 @@
                     Login with google
                 </x-jet-secondary-button>
             </a>
+            <a href="{{route('register')}}" class="d-inline-flex justify-content-end mt-4">
+                Register
+            </a>
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>

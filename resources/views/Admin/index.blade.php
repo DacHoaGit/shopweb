@@ -45,35 +45,35 @@
             <div class="card tilebox-one">
                 <div class="card-body">
                     <i class="mdi mdi-cart-plus widget-icon" style="color:blue;"></i>
-                    <h6 class="text-uppercase mt-0">Orders</h6>
-                    <h2 class="my-2 total-order" id="active-users-count"></h2>
+                    <h6 class="text-uppercase mt-0">Orders Unpaid</h6>
+                    <h2 class="my-2 total-unpaid" id="active-users-count"></h2>
                 </div> <!-- end card-body-->
             </div>
         </div>
-        <div class="col-xl-3 col-lg-4" style="margin-top: 10px">
-            <div class="card tilebox-one">
+        <div class=" col-xl-3 col-lg-4" style="margin-top: 10px">
+            <div class=" bg-warning-lighten card tilebox-one">
                 <div class="card-body">
                     <i class="mdi mdi-cart-plus widget-icon" style="color:blue;"></i>
-                    <h6 class="text-uppercase mt-0">Products sold</h6>
-                    <h2 class="my-2 total-product" id="active-users-count"></h2>
+                    <h6 class="text-uppercase mt-0">Orders Process</h6>
+                    <h2 class="my-2 total-process" id="active-users-count"></h2>
                 </div> <!-- end card-body-->
             </div>
         </div>
         <div class="col-xl-3 col-lg-4" style="margin-top: 10px">
-            <div class="card tilebox-one">
+            <div class="bg-info-lighten card tilebox-one">
                 <div class="card-body">
                     <i class="mdi mdi-currency-usd widget-icon" style="color:blue;"></i>
-                    <h6 class="text-uppercase mt-0">Revenue</h6>
-                    <h2 class="my-2 total-revenue" id="active-users-count"></h2>
+                    <h6 class="text-uppercase mt-0">Orders Shiped</h6>
+                    <h2 class="my-2 total-shiped" id="active-users-count"></h2>
                 </div> <!-- end card-body-->
             </div>
         </div>
         <div class="col-xl-3 col-lg-4" style="margin-top: 10px">
-            <div class="card tilebox-one">
+            <div class="bg-danger-lighten card tilebox-one">
                 <div class="card-body">
                     <i class="mdi mdi-account widget-icon" style="color:blue;"></i>
-                    <h6 class="text-uppercase mt-0">Users</h6>
-                    <h2 class="my-2 total-user" id="active-users-count"></h2>
+                    <h6 class="text-uppercase mt-0">Orders Cancel</h6>
+                    <h2 class="my-2 total-cancel" id="active-users-count"></h2>
                 </div> <!-- end card-body-->
             </div>
         </div>
@@ -374,12 +374,17 @@
                         $('.total-product').text(result.totalProductSold);
                         $('.total-revenue').text(result.totalPrice);
                         $('.total-user').text(result.totalUser);
+                        $('.total-unpaid').text(result.totalUnpaid);
+                        $('.total-process').text(result.totalProcess);
+                        $('.total-shiped').text(result.totalShiped);
+                        $('.total-cancel').text(result.totalCancel);
                     }
                 })
             }
             
             getfilter();
             $("#input-date-from,#input-date-to").datepicker({
+                dateFormat: 'yy/mm/dd',
                 onSelect: function(dateText) {
                     getfilter();
                 }})
