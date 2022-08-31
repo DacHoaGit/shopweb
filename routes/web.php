@@ -41,7 +41,6 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/', [HomeController::class,'index'])->name('admin');
         Route::get('/update-cookie', [HomeController::class,'updateCookie']);
 
-        
         Route::post('/filter-day', [HomeController::class,'filterDay'])->name('filterDay');
         // Route::post('main/filter-product', [HomeController::class,'filterProduct']);
 
@@ -148,7 +147,7 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
  
-    return redirect('/home');
+    return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 // Resending The Verification Email

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmail;
 use App\Models\Cart;
 use App\Models\Customer;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -111,6 +113,10 @@ class CartController extends Controller
             }
             DB::commit();
             Session::flash('success', 'Order Product Success !');
+
+            $email = Auth::user()->email;
+            SendEmail::dispatch($email)->delay(now()->addSeconds(5));
+
             Session::forget('carts');
             return redirect()->back();
             
