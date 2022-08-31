@@ -32,6 +32,11 @@ class HomeController extends Controller
         $to = Carbon::parse($request->input('dateTo'))->endOfDay();
 
         $totalOrder = Customer::whereBetween('created_at',[$from,$to])->count();
+
+        $totalOrderUnpaid = Customer::whereBetween('created_at',[$from,$to])->where('status',0)->count();
+        $totalOrderProcess = Customer::whereBetween('created_at',[$from,$to])->where('status',1)->count();
+        $totalOrderShiped = Customer::whereBetween('created_at',[$from,$to])->where('status',2)->count();
+        $totalOrderCancel = Customer::whereBetween('created_at',[$from,$to])->where('status',3)->count();
         
         $totalUser = User::where('role',1)->whereBetween('updated_at',[$from,$to])->count();
 
@@ -44,12 +49,15 @@ class HomeController extends Controller
             $totalPrice += $each->total_price;
         }
 
-        
         return response()->json([   
             'totalOrder' => $totalOrder,
             'totalProductSold' => $totalProductSold,
             'totalPrice' => $totalPrice,
             'totalUser' => $totalUser,
+            'totalUnpaid' => $totalOrderUnpaid,
+            'totalProcess' => $totalOrderProcess,
+            'totalShiped' => $totalOrderShiped,
+            'totalCancel' => $totalOrderCancel,
         ]);
     }
 }
