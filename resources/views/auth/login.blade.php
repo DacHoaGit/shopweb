@@ -48,7 +48,7 @@
                 </x-jet-button>
             </div>
 
-            <a href="{{route('login-facebook')}}" class="flex items-center justify-center mt-4">
+            <a href="{{ route('login-google') }}" class="flex items-center justify-center mt-4">
                 <x-jet-secondary-button >
                     <img width="20px" style="margin-right:8px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png">
                     Login with google

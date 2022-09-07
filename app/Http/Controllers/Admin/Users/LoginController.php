@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\c;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -24,16 +26,43 @@ class LoginController extends Controller
     // {
     //     return App\Http\Controllers\Admin\Users\Socialite::driver($driver)->redirect();
     // }
-    public function loginWithGoogle(){
-        return Socialite::driver('facebook')->redirect();
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
     }
-    public function callBackFromGoogle(){
-        try {
-            $user = Socialite::driver('facebook')->user();
+        
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function handleGoogleCallback(){
+        // try {
             
-        } catch (\Throwable $th) {
+            $user = Socialite::driver('google')->stateless()->user();
 
-        }
+            $finduser = User::where('google_id', $user->id)->first();
+       
+            if($finduser){
+                Auth::login($finduser);
+                return redirect('/');
+            }
+            else{
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'google_id'=> $user->id,
+                    'password' => encrypt('123456dummy')
+                ]);
+                
+                Auth::login($newUser);
+      
+                return redirect('/');
+            }
+      
+        // } 
+        // catch (Exception $e) {
+        //     dd($e->getMessage());
+        // }
     }
-
 }

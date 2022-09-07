@@ -98,6 +98,7 @@ return [
     'socialite' => [
         'drivers' => [
             'facebook',
+            'google'
         ],
     ],
 
