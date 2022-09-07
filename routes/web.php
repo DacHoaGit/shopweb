@@ -158,9 +158,15 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 
+// Route::get('redirect/{driver}',[LoginController::class,'redirectToProvider'])
+//     ->name('login.provider')
+//     ->where('driver', implode('|', config('auth.socialite.drivers')));
 
 
-Route::prefix('facebook')->group(function(){
-    Route::get('/login', [LoginController::class,'loginWithGoogle'])->name('login-facebook');
-    Route::get('/callback', [LoginController::class,'callBackFromGoogle']);
-});
+// Route::prefix('google')->group(function(){
+//     Route::get('/login', [LoginController::class,'loginWithGoogle'])->name('login-google');
+//     Route::get('/callback', [LoginController::class,'callBackFromGoogle']);
+// });
+
+Route::get('auth/google', [LoginController::class, 'redirectToGoogle'])->name('login-google');
+Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
